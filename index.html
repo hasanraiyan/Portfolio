@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raiyan Hasan - Web Developer</title>
+    <meta name="description"
+        content="Welcome to the portfolio website of Raiyan Hasan, a passionate web developer studying at MIT Muzaffarpur. Explore Raiyan's skills in Python, HTML/CSS/JavaScript, and graphic design. View projects like Tic-Tac-Toe, Calculator, and more. Contact Raiyan for web development inquiries.">
+    <meta name="keywords"
+        content="Raiyan Hasan, web developer, MIT Muzaffarpur, portfolio, Python, HTML, CSS, JavaScript, graphic design, Tic-Tac-Toe, Calculator">
+    <meta name="author" content="Raiyan Hasan">
+    <link rel="canonical" href="https://hasanraiyan.github.io/Portfolio/">
+    <meta property="og:title" content="Raiyan Hasan - Web Developer">
+    <meta property="og:description"
+        content="Welcome to the portfolio website of Raiyan Hasan, a passionate web developer studying at MIT Muzaffarpur. Explore Raiyan's skills in Python, HTML/CSS/JavaScript, and graphic design. View projects like Tic-Tac-Toe, Calculator, and more. Contact Raiyan for web development inquiries.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hasanraiyan.github.io/Portfolio/">
+    <meta property="og:image" content="https://hasanraiyan.github.io/Portfolio/images/user1.png">
+
+
+    <meta property="twitter:title" content="Raiyan Hasan - Web Developer">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/002a13abdf.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="./images/logo.png" alt="logo" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <!-- <li><a href="#services">Services</a></li> -->
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <i class="fas fa-times" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()"></i>
+            </nav>
+            <div class="header-text">
+                Web Developer
+                <h1>Hi, I am <span> Raiyan Hasan </span><br> studying at <br> MIT Muzaffarpur</h1>
+            </div>
+        </div>
+    </div>
+    <!-- ----------about------------ -->
+    <div id="about" style="scroll-margin-top: 3.2rem;">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="./images/user1.png" alt="">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="subtitle">About me</h1>
+                    <p>Hello! I'm Raiyan Hasan, a passionate student pursuing my Bachelor of Technology degree in the IT
+                        branch at MIT Muzaffarpur. I'm deeply fascinated by the world of technology and its potential to
+                        solve complex problems and improve lives.</p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <!-- <p class="tab-links" onclick="opentab('experience')">Experience</p> -->
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li>
+                                <a href="https://www.hackerrank.com/certificates/bb25b2ccfbf1"
+                                    title="Click to see certification"><span>Python</span></a><br>Proficient in Python
+                                programming language
+                            </li>
+                            <li>
+                                <span>HTML/CSS/JavaScript</span><br>Experience in front-end web development
+                            </li>
+                            <li>
+                                <span>Canva</span><br>Proficient in graphic design using Canva
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- ------------------
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li>
+                                <span>UI/U</span><br>Designing Website
+                            </li>
+                            <li>
+                                <span>UI/UX</span><br>Designng Website
+                            </li>
+                            <li>
+                                <span>UI/UX</span><br>Desining Website
+                            </li>
+                        </ul>
+                    </div>
+                    ----------------------- -->
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li>
+                                <a href="https://www.mitmuzaffarpur.org/mit-student/rayan-hasan/">
+                                    <div class="content">
+                                        <span>Bachelor of Technology (B.Tech)</span>
+                                        <p>Branch: Information Technology</p>
+                                        <p>Institution: MIT Muzaffarpur</p>
+                                    </div>
+                                </a>
+
+
+                            </li>
+                            <li>
+                                <div class="content">
+                                    <span>Intermediate (12th Grade)</span>
+                                    <p>School: St. Judes Vidyalaya, Barauni</p>
+                                    <p>Year of Completion: 2023</p>
+                                    <p>Percentage: 84.6%</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="content">
+                                    <span>Matriculation (10th Grade)</span>
+                                    <p>School: St. Judes Vidyalaya, Barauni</p>
+                                    <p>Year of Completion:2021</p>
+                                    <a
+                                        href="https://www.shivamconvent.com/images/result/10%20ST.JUDES%20BARAUNI-min.pdf">
+                                        <p>Percentage: 91.8%</p>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------>
+    <!-- <div id="services">
+        <div class="container">
+            <h1 class="subtitle">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-solid fa-code"></i>
+                    <h2>Web develop</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati molestias in laudantium est
+                        deleniti excepturi, maiores cumque aspernatur autem dolorum.</p>
+                    <a href="#">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-crop"></i>
+                    <h2>Web develop</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati molestias in laudantium est
+                        deleniti excepturi, maiores cumque aspernatur autem dolorum.</p>
+                    <a href="#">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-brands fa-app-store"></i>
+                    <h2>Web develop</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati molestias in laudantium est
+                        deleniti excepturi, maiores cumque aspernatur autem dolorum.</p>
+                    <a href="#">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- portfolio -->
+    <div id="portfolio" style="scroll-margin-top: 1.3rem;">
+        <div class="container">
+            <h1 class="subtitle">My Work</h1>
+            <div class="work-lists">
+                <div class="work">
+                    <img src="./images/work-1.png" alt="Image of Tik Tak Toe game. Play against AI">
+                    <div class="layer">
+                        <h3>Tik Tak Toe</h3>
+                        <p>Tic-Tac-Toe is a timeless game where players aim to align three of their symbols in a row,
+                            column, or diagonal on a 3x3 grid. Test your skills against an AI opponent and see if you
+                            can outwit its strategies to emerge victorious!</p>
+                        <br>
+                        <p>Try to beat the AI</p>
+                        <a href="https://hasanraiyan.github.io/projects/tik%20tak%20toe/index.html"><i
+                                class="fa-solid fa-link"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="./images/work-2.png" alt="Image of calculator">
+                    <div class="layer">
+                        <h3>Calculator</h3>
+                        <p>Efficiently crunching numbers and solving equations with just a tap, the calculator app
+                            simplifies the complexities of arithmetic.</p>
+                        <a href="https://hasanraiyan.github.io/projects/calculator/index.html"><i
+                                class="fa-solid fa-link"></i></a>
+                    </div>
+
+                </div>
+                <div class="work">
+                    <img src="./images/work-3.png" alt="">
+                    <div class="layer">
+                        <h3>Manage your project</h3>
+                        <p>A website where you can manage your projects.</p>
+                        <a href="https://hasanraiyan.github.io/projects/"><i class="fa-solid fa-link"></i></a>
+                    </div>
+
+                </div>
+                <div class="work hidden">
+                    <img src="./images/work-3.png" alt="Image of Tik Tak Toe, Play against human">
+                    <div class="layer">
+                        <h3>Tik Tak Toe PvP</h3>
+                        <p>Tik Tak Toe play against another player</p>
+                        <a href="https://hasanraiyan.github.io/TikTakToe/"><i class="fa-solid fa-link"></i></a>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <span class="btn2" onclick="showMore()" id="more-btn"><i class="fa-solid fa-angle-up"></i></span>
+        <span class="btn2 hidden" href="#portfolio" onclick="showLess()" id="less-btn" ><i class="fa-solid fa-angle-down"></i></span>
+    </div>
+
+    <!--content-->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact me</h1>
+                    <p> <i class="fas fa-paper-plane"></i>raiyanhasan2006@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="https://www.hackerrank.com/profile/raiyanhasan2006" title="Hackerrank"><i
+                                class="fa-brands fa-hackerrank"></i></a>
+                        <a href="https://www.linkedin.com/in/hasanraiyan/" title="Linkedin"><i
+                                class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/hasanraiyan" title="Github"><i class="fa-brands fa-github"></i></a>
+                        <!-- <a href="https://replit.com/@hasanraiyan" title=""><i><img src="./images/hackerrank-icon.png"></i></a> -->
+                    </div>
+                    <br>
+
+                    <!-- <a href="./images/my-cv.pdf" class="btn btn2">Download Cv</a> -->
+                </div>
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your name" required>
+                        <input type="email" name="Email" id="email" placeholder="Your email" required>
+                        <input type="tel" name="Phone" id="phone" placeholder="Enter your phone number">
+                        <textarea name="Message" id="Message" placeholder="Your Message" rows="6"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright &copy; Raiyan</p>
+        </div>
+    </div>
+
+    <script>
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        function opentab(tabname) {
+            for (tablink of tablinks) {
+                tablink.classList.remove("active-link");
+            }
+            for (tabcontent of tabcontents) {
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+
+        }
+    </script>
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "0";
+        }
+        function closemenu() {
+            sidemenu.style.right = "-200px";
+        }
+    </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw0qBBh43wiVS4iRn6d4jqazeOGIq8U62JjdfFHnGKsbT2mTBbmXIZ_jezCEZccnIMr/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById('msg');
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => msg.innerText = "Message sent successfully!"
+                )
+
+                .catch(error => console.error('Error!', error.message))
+        }
+        )
+    </script>
+    <script>
+        var works = document.getElementsByClassName('work');
+        var more = document.getElementById('more-btn');
+        var less = document.getElementById('less-btn');
+        function showMore() {
+            for (var i = 0; i < works.length; i++) {
+                works[i].classList.remove('hidden');
+            }
+            more.classList.add('hidden');
+            less.classList.remove('hidden');
+        }
+        function showLess() {
+            for (var i = 3; i < works.length; i++) {
+                works[i].classList.add('hidden');
+            }
+            more.classList.remove('hidden');
+            less.classList.add('hidden');
+        }
+    </script>
+</body>
+
+</html>
