@@ -131,7 +131,7 @@ nav ul li a:hover::after {
 }
 .tab-contents ul li {
   list-style: none;
-  margin: 10px 0;
+  margin: 10px 0 0;
 }
 .tab-contents ul li span {
   color: #b54769;
@@ -142,6 +142,7 @@ nav ul li a:hover::after {
 }
 .tab-contents.active-tab {
   display: block;
+
 }
 /* services */
 
@@ -259,7 +260,7 @@ nav ul li a:hover::after {
 }
 .btn3 {
   display: block;
-  margin: 50px auto;
+  margin: 0 auto;
   width: fit-content;
 
   padding: 14px 50px;
