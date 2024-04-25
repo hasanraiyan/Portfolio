@@ -73,11 +73,20 @@
                             <li>
                                 <span>HTML/CSS/JavaScript</span><br>Experience in front-end web development
                             </li>
-                            <li>
+
+                            <li class="hidden">
                                 <span>Canva</span><br>Proficient in graphic design using Canva
                             </li>
+                            <li class="hidden">
+                                <span>AI Engineering</span><br>Proficient in the use of AI for problem-solving and automation
+                            </li>
+                            
 
                         </ul>
+                        <span class="btn3" onclick="showMoreSkills()" id="more-skills-btn"><i
+                                class="fa-solid fa-angle-up"></i></span>
+                        <span class="btn3 hidden" href="#portfolio" onclick="showLessSkills()" id="less-skills-btn"><i
+                                class="fa-solid fa-angle-down"></i></span>
                     </div>
                     <!-- ------------------
                     <div class="tab-contents" id="experience">
@@ -115,7 +124,7 @@
                                     <p>Percentage: 84.6%</p>
                                 </div>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <div class="content">
                                     <span>Matriculation (10th Grade)</span>
                                     <p>School: St. Judes Vidyalaya, Barauni</p>
@@ -127,6 +136,10 @@
                                 </div>
                             </li>
                         </ul>
+                        <span class="btn3" onclick="showMoreEducation()" id="more-Education-btn"><i
+                                class="fa-solid fa-angle-up"></i></span>
+                        <span class="btn3 hidden" href="#portfolio" onclick="showLessEducation()"
+                            id="less-Education-btn"><i class="fa-solid fa-angle-down"></i></span>
                     </div>
 
                 </div>
@@ -207,7 +220,7 @@
                         <a href="https://hasanraiyan.github.io/projects/"><i class="fa-solid fa-link"></i></a>
                     </div>
                 </div>
-               
+
 
 
             </div>
@@ -310,6 +323,67 @@
             less.classList.add('hidden');
         }
     </script>
+    <script>
+        // Get the div with the id "skills"
+        var skillsDiv = document.getElementById("skills");
+
+        // Get the <ul> element within the div
+        var ulElement = skillsDiv.querySelector("ul");
+
+        // Get all <li> elements that are direct children of the <ul>
+        var liElements = ulElement.children;
+
+
+        var morebtn = document.getElementById('more-skills-btn');
+        var lessbtn = document.getElementById('less-skills-btn');
+        function showMoreSkills() {
+            for (var i = 0; i < liElements.length; i++) {
+                liElements[i].classList.remove('hidden');
+            }
+            morebtn.classList.add('hidden');
+            lessbtn.classList.remove('hidden');
+        }
+        function showLessSkills() {
+            for (var i = 2; i < liElements.length; i++) {
+                liElements[i].classList.add('hidden');
+            }
+            morebtn.classList.remove('hidden');
+            lessbtn.classList.add('hidden');
+        }
+    </script>
+                            <!-- <span class="btn3" onclick="showMoreEducation()" id="more-Education-btn"><i
+                                class="fa-solid fa-angle-up"></i></span>
+                        <span class="btn3 hidden" href="#portfolio" onclick="showLessEducation()"
+                            id="less-Education-btn"><i class="fa-solid fa-angle-down"></i></span> -->
+        <script>
+            // Get the div with the id "skills"
+            var educationDiv = document.getElementById("education");
+    
+            // Get the <ul> element within the div
+            var ulEducationElement = educationDiv.querySelector("ul");
+    
+            // Get all <li> elements that are direct children of the <ul>
+            var liEducationElements = ulEducationElement.children;
+    
+    
+            var moreEducationbtn = document.getElementById('more-Education-btn');
+            var lessEducationbtn = document.getElementById('less-Education-btn');
+            function showMoreEducation() {
+                for (var i = 0; i < liEducationElements.length; i++) {
+                    liEducationElements[i].classList.remove('hidden');
+                }
+                moreEducationbtn.classList.add('hidden');
+                lessEducationbtn.classList.remove('hidden');
+            }
+            function showLessEducation() {
+                for (var i = 2; i < liEducationElements.length; i++) {
+                    liEducationElements[i].classList.add('hidden');
+                }
+                moreEducationbtn.classList.remove('hidden');
+                lessEducationbtn.classList.add('hidden');
+            }
+        </script>
+
 </body>
 
 </html>
