@@ -78,15 +78,16 @@
                                 <span>Canva</span><br>Proficient in graphic design using Canva
                             </li>
                             <li class="hidden">
-                                <span>AI Engineering</span><br>Proficient in the use of AI for problem-solving and automation
+                                <span>AI Engineering</span><br>Proficient in the use of AI for problem-solving and
+                                automation
                             </li>
-                            
+
 
                         </ul>
                         <span class="btn3" onclick="showMoreSkills()" id="more-skills-btn"><i
-                                class="fa-solid fa-angle-up"></i></span>
-                        <span class="btn3 hidden" href="#portfolio" onclick="showLessSkills()" id="less-skills-btn"><i
                                 class="fa-solid fa-angle-down"></i></span>
+                        <span class="btn3 hidden" href="#portfolio" onclick="showLessSkills()" id="less-skills-btn"><i
+                                class="fa-solid fa-angle-up"></i></span>
                     </div>
                     <!-- ------------------
                     <div class="tab-contents" id="experience">
@@ -137,9 +138,9 @@
                             </li>
                         </ul>
                         <span class="btn3" onclick="showMoreEducation()" id="more-Education-btn"><i
-                                class="fa-solid fa-angle-up"></i></span>
+                                class="fa-solid fa-angle-down"></i></span>
                         <span class="btn3 hidden" href="#portfolio" onclick="showLessEducation()"
-                            id="less-Education-btn"><i class="fa-solid fa-angle-down"></i></span>
+                            id="less-Education-btn"><i class="fa-solid fa-angle-up"></i></span>
                     </div>
 
                 </div>
@@ -181,6 +182,17 @@
             <h1 class="subtitle">My Work</h1>
             <div class="work-lists">
                 <div class="work">
+
+                    <img src="./images/work-5.png" alt="Image of MIT responsive website clone.">
+                    <div class="layer">
+                        <h3>Responsive Website: MIT Muzaffarpur webiste clone</h3>
+                        <p>A clone of website of mit muzaffarpur</p>
+                        <br>
+                        <a href="https://hasanraiyan.github.io/MIT"><i class="fa-solid fa-link"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+
                     <img src="./images/work-1.png" alt="Image of Tik Tak Toe game. Play against AI">
                     <div class="layer">
                         <h3>Tik Tak Toe</h3>
@@ -204,7 +216,7 @@
                     </div>
 
                 </div>
-                <div class="work">
+                <div class="work" hidden>
                     <img src="./images/work-3.png" alt="Image of Tik Tak Toe, Play against human">
                     <div class="layer">
                         <h3>Tik Tak Toe PvP</h3>
@@ -225,9 +237,9 @@
 
             </div>
         </div>
-        <span class="btn3" onclick="showMore()" id="more-btn"><i class="fa-solid fa-angle-up"></i></span>
+        <span class="btn3" onclick="showMore()" id="more-btn"><i class="fa-solid fa-angle-down"></i></span>
         <span class="btn3 hidden" href="#portfolio" onclick="showLess()" id="less-btn"><i
-                class="fa-solid fa-angle-down"></i></span>
+                class="fa-solid fa-angle-up"></i></span>
     </div>
 
     <!--content-->
@@ -351,38 +363,38 @@
             lessbtn.classList.add('hidden');
         }
     </script>
-                            <!-- <span class="btn3" onclick="showMoreEducation()" id="more-Education-btn"><i
+    <!-- <span class="btn3" onclick="showMoreEducation()" id="more-Education-btn"><i
                                 class="fa-solid fa-angle-up"></i></span>
                         <span class="btn3 hidden" href="#portfolio" onclick="showLessEducation()"
                             id="less-Education-btn"><i class="fa-solid fa-angle-down"></i></span> -->
-        <script>
-            // Get the div with the id "skills"
-            var educationDiv = document.getElementById("education");
-    
-            // Get the <ul> element within the div
-            var ulEducationElement = educationDiv.querySelector("ul");
-    
-            // Get all <li> elements that are direct children of the <ul>
-            var liEducationElements = ulEducationElement.children;
-    
-    
-            var moreEducationbtn = document.getElementById('more-Education-btn');
-            var lessEducationbtn = document.getElementById('less-Education-btn');
-            function showMoreEducation() {
-                for (var i = 0; i < liEducationElements.length; i++) {
-                    liEducationElements[i].classList.remove('hidden');
-                }
-                moreEducationbtn.classList.add('hidden');
-                lessEducationbtn.classList.remove('hidden');
+    <script>
+        // Get the div with the id "skills"
+        var educationDiv = document.getElementById("education");
+
+        // Get the <ul> element within the div
+        var ulEducationElement = educationDiv.querySelector("ul");
+
+        // Get all <li> elements that are direct children of the <ul>
+        var liEducationElements = ulEducationElement.children;
+
+
+        var moreEducationbtn = document.getElementById('more-Education-btn');
+        var lessEducationbtn = document.getElementById('less-Education-btn');
+        function showMoreEducation() {
+            for (var i = 0; i < liEducationElements.length; i++) {
+                liEducationElements[i].classList.remove('hidden');
             }
-            function showLessEducation() {
-                for (var i = 2; i < liEducationElements.length; i++) {
-                    liEducationElements[i].classList.add('hidden');
-                }
-                moreEducationbtn.classList.remove('hidden');
-                lessEducationbtn.classList.add('hidden');
+            moreEducationbtn.classList.add('hidden');
+            lessEducationbtn.classList.remove('hidden');
+        }
+        function showLessEducation() {
+            for (var i = 2; i < liEducationElements.length; i++) {
+                liEducationElements[i].classList.add('hidden');
             }
-        </script>
+            moreEducationbtn.classList.remove('hidden');
+            lessEducationbtn.classList.add('hidden');
+        }
+    </script>
 
 </body>
 
