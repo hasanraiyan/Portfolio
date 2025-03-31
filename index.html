@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raiyan Hasan - Web Developer Portfolio</title> <!-- Slightly improved title -->
-    <meta name="description" content="Welcome to the portfolio of Raiyan Hasan, a passionate web developer studying IT at MIT Muzaffarpur. Explore skills in Python, Web Development (HTML/CSS/JS), and projects."> <!-- Concise Description -->
-    <meta name="keywords" content="Raiyan Hasan, web developer, portfolio, MIT Muzaffarpur, Python, HTML, CSS, JavaScript, front-end developer, student developer"> <!-- Focused Keywords -->
+    <title>Raiyan Hasan - Web Developer Portfolio</title>
+    <meta name="description" content="Welcome to the portfolio of Raiyan Hasan, a passionate web developer studying IT at MIT Muzaffarpur. Explore skills in Python, Web Development (HTML/CSS/JS), and projects.">
+    <meta name="keywords" content="Raiyan Hasan, web developer, portfolio, MIT Muzaffarpur, Python, HTML, CSS, JavaScript, front-end developer, student developer">
     <meta name="author" content="Raiyan Hasan">
     <link rel="canonical" href="https://hasanraiyan.github.io/Portfolio/">
-    <!-- Open Graph Meta Tags -->
+    <!-- Open Graph / Twitter Card Meta Tags (Keep as is) -->
     <meta property="og:title" content="Raiyan Hasan - Web Developer Portfolio">
     <meta property="og:description" content="Explore the web development portfolio of Raiyan Hasan, student at MIT Muzaffarpur.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hasanraiyan.github.io/Portfolio/">
-    <meta property="og:image" content="https://hasanraiyan.github.io/Portfolio/images/user1.png"> <!-- Make sure this image exists and is accessible -->
+    <meta property="og:image" content="https://hasanraiyan.github.io/Portfolio/images/user1.png">
     <meta property="og:image:alt" content="Raiyan Hasan Profile Picture">
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image"> <!-- Use summary_large_image if your og:image is suitably large -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Raiyan Hasan - Web Developer Portfolio">
     <meta name="twitter:description" content="Explore the web development portfolio of Raiyan Hasan, student at MIT Muzaffarpur.">
-    <meta name="twitter:image" content="https://hasanraiyan.github.io/Portfolio/images/user1.png"> <!-- Make sure this image exists and is accessible -->
+    <meta name="twitter:image" content="https://hasanraiyan.github.io/Portfolio/images/user1.png">
     <meta name="twitter:image:alt" content="Raiyan Hasan Profile Picture">
 
     <!-- Google Fonts -->
@@ -30,114 +29,328 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/002a13abdf.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS via Play CDN -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    },
+                    colors: {
+                        // Slightly refined palette
+                        primary: '#0a66c2',         // LinkedIn Blue
+                        'primary-darker': '#004182', // Darker Blue
+                        secondary: '#28a745',       // Green
+                        accent: '#ffc107',          // Amber/Gold Accent
+                        'text-main': '#1f2937',     // Darker Gray for text
+                        'text-light': '#4b5563',    // Medium Gray
+                        'bg-light': '#f8fafc',      // Very Light Gray BG
+                        'bg-surface': '#ffffff',    // White Surface
+                        'border-light': '#e5e7eb',  // Light Border
+                        'glass-bg': 'rgba(255, 255, 255, 0.6)', // BG for glass effect
+                        'glass-border': 'rgba(255, 255, 255, 0.3)',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.6s ease-out forwards',
+                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInLeft: {
+                           '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                           '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                           '0%': { opacity: '0', transform: 'translateX(30px)' },
+                           '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                         pulseGlow: {
+                           '0%, 100%': { boxShadow: '0 0 5px rgba(10, 102, 194, 0.3)' },
+                           '50%': { boxShadow: '0 0 20px rgba(10, 102, 194, 0.7)' },
+                         }
+                    },
+                    backdropBlur: { // Enable backdrop blur utilities
+                      xs: '2px',
+                      sm: '4px',
+                      md: '8px',
+                      lg: '12px',
+                      xl: '16px',
+                    }
+                },
+            },
+            plugins: [],
+            // darkMode: 'class', // Enable if needed
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-poppins antialiased bg-bg-light text-text-main;
+            }
+            /* Styles for elements animated on scroll */
+            .animate-on-scroll {
+                @apply opacity-0 transition-all duration-700 ease-out;
+            }
+            .animate-on-scroll.is-visible {
+                @apply opacity-100;
+            }
+            .animate-fade-up.is-visible { @apply translate-y-0; }
+            .animate-fade-up { @apply translate-y-5; }
+            .animate-slide-left.is-visible { @apply translate-x-0; }
+            .animate-slide-left { @apply translate-x-[-30px]; }
+            .animate-slide-right.is-visible { @apply translate-x-0; }
+            .animate-slide-right { @apply translate-x-[30px]; }
+
+            /* Custom underline for nav */
+            #main-nav ul:not(#sidemenu) li a::after {
+                 content: '';
+                 @apply absolute bottom-[-5px] left-0 h-[3px] w-0 bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-300;
+             }
+             #main-nav ul:not(#sidemenu) li a:hover::after,
+             #main-nav ul:not(#sidemenu) li a.active-nav::after { /* Add active state */
+                 @apply w-full;
+             }
+        }
+        @layer components {
+             /* Glassmorphism Style - Base styles for supporting browsers */
+            .glass-effect {
+                @apply bg-glass-bg backdrop-blur-md border border-glass-border shadow-lg;
+                /* NOTE: The fallback is now handled outside this rule */
+            }
+             /* Enhanced Button Style */
+            .btn {
+                @apply inline-block px-6 py-2.5 rounded-full font-medium text-center transition-all duration-300 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2;
+            }
+            .btn-primary {
+                @apply bg-gradient-to-r from-primary to-blue-500 text-white border border-transparent hover:from-primary-darker hover:to-primary focus:ring-primary;
+            }
+            .btn-secondary {
+                 @apply bg-transparent text-primary border border-primary hover:bg-primary/10 focus:ring-primary;
+            }
+             /* Enhanced Card Style */
+            .content-card {
+                @apply bg-bg-surface rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5 p-6 md:p-8;
+            }
+             /* Enhanced Tab Active Link */
+            .tab-links.active-link {
+                @apply text-primary border-primary font-semibold; /* Made bolder */
+            }
+            .tab-links {
+                @apply border-b-2 pb-1; /* Ensure consistent bottom border space */
+            }
+             /* Responsive Subtitle Underline */
+             .subtitle-underline::after {
+                 content: '';
+                 @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary to-accent rounded-full;
+             }
+             .subtitle-underline-left::after { /* For left aligned */
+                 content: '';
+                 @apply absolute bottom-0 left-0 w-16 h-1 bg-gradient-to-r from-primary to-accent rounded-full;
+             }
+        }
+        @layer utilities {
+            /* Hide scrollbar for demo */
+            /* Add any other utility overrides if needed */
+            .btn-toggle.hidden, .btn.hidden {
+                display: none !important;
+             }
+             .work-item .layer a:hover i {
+                @apply rotate-[360deg] transition-transform duration-500;
+             }
+        }
+
+        /* --- Fallback for glass-effect --- */
+        /* Apply this *only* if backdrop-filter is NOT supported */
+        /* Use standard CSS here, not @apply */
+        @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            .glass-effect {
+                background-color: rgba(255, 255, 255, 0.9); /* Equivalent to Tailwind's bg-white/90 */
+                /* No need to apply backdrop-filter: none; as it wouldn't work anyway */
+            }
+        }   
+    </style>
+
 </head>
 
-<body>
+<body class="bg-bg-light text-text-main">
 
-    <!-- ---------- HEADER ---------- -->
-    <header id="header">
-        <div class="container">
-            <nav>
-                <a href="#" class="logo-link"><img src="./images/logo.png" alt="Raiyan Hasan Logo" class="logo"></a>
-                <ul id="sidemenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li class="icon-close"><i class="fas fa-times" onclick="closemenu()" aria-label="Close menu"></i></li>
+    <!-- ---------- STICKY NAVIGATION HEADER (with Glassmorphism) ---------- -->
+    <header id="site-header" class="sticky top-0 z-50 transition-all duration-300">
+         <!-- Glassmorphism applied dynamically on scroll -->
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav id="main-nav" class="flex items-center justify-between h-16 md:h-20">
+                <a href="#hero" class="logo-link flex-shrink-0 transition-transform duration-300 hover:scale-105 animate-on-scroll animate-slide-left" data-animate>
+                    <img src="./images/logo.png" alt="Raiyan Hasan Logo" class="h-10 md:h-12">
+                </a>
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex items-center space-x-6 lg:space-x-8 animate-on-scroll animate-fade-up" data-animate>
+                    <li><a href="#hero" class="nav-link text-text-main hover:text-primary font-medium relative py-2 transition-colors duration-300">Home</a></li>
+                    <li><a href="#about" class="nav-link text-text-main hover:text-primary font-medium relative py-2 transition-colors duration-300">About</a></li>
+                    <li><a href="#portfolio" class="nav-link text-text-main hover:text-primary font-medium relative py-2 transition-colors duration-300">Portfolio</a></li>
+                    <li><a href="#contact" class="nav-link text-text-main hover:text-primary font-medium relative py-2 transition-colors duration-300">Contact</a></li>
                 </ul>
-                <button class="icon-menu" onclick="openmenu()" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+                <!-- Mobile Menu Button -->
+                <button class="icon-menu md:hidden text-primary text-3xl hover:text-primary-darker transition-colors duration-300" onclick="openmenu()" aria-label="Open menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Mobile Menu Panel -->
+                <ul id="sidemenu" class="md:hidden fixed top-0 right-0 h-screen w-64 sm:w-72 bg-gradient-to-b from-primary-darker to-primary shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out pt-24 px-6 space-y-5 z-40">
+                    <li class="absolute top-6 right-6">
+                         <button class="icon-close text-white hover:text-gray-200 text-3xl transition-colors duration-300" onclick="closemenu()" aria-label="Close menu">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </li>
+                    <li><a href="#hero" class="block text-white hover:text-accent text-xl font-medium py-2 transition-colors duration-300">Home</a></li>
+                    <li><a href="#about" class="block text-white hover:text-accent text-xl font-medium py-2 transition-colors duration-300">About</a></li>
+                    <li><a href="#portfolio" class="block text-white hover:text-accent text-xl font-medium py-2 transition-colors duration-300">Portfolio</a></li>
+                    <li><a href="#contact" class="block text-white hover:text-accent text-xl font-medium py-2 transition-colors duration-300">Contact</a></li>
+                </ul>
             </nav>
-            <!-- <div class="header-text">
-                <p>Web Developer</p>
-                <h1>Hi, I'm <span>Raiyan Hasan</span><br>from MIT Muzaffarpur</h1>
-            </div> -->
         </div>
     </header>
 
-    <!-- ---------- ABOUT ---------- -->
-    <section id="about">
-        <div class="container">
-            <div class="row">
-                <div class="about-col-1">
-                    <img src="./images/user1.png" alt="Raiyan Hasan profile picture">
+    <!-- ---------- HERO SECTION ---------- -->
+    <section id="hero" class="pt-28 md:pt-32 pb-20 md:pb-28 min-h-[calc(100vh-80px)] flex items-center bg-gradient-to-br from-blue-50 via-bg-light to-indigo-50 relative overflow-hidden">
+        <!-- Subtle background shapes (optional) -->
+        <div class="absolute top-1/4 left-10 w-32 h-32 bg-blue-200/30 rounded-full filter blur-2xl opacity-50 animate-pulse-glow"></div>
+        <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-indigo-200/30 rounded-full filter blur-2xl opacity-50 animate-pulse-glow animation-delay-2000"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            <div class="header-text text-center max-w-4xl mx-auto">
+                <p class="text-lg md:text-xl text-primary font-medium mb-3 animate-on-scroll animate-fade-up" data-animate data-delay="100">Web Developer & IT Student</p>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-text-main leading-tight mb-6 animate-on-scroll animate-fade-up" data-animate data-delay="200">
+                    Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">Raiyan Hasan</span><br>from MIT Muzaffarpur
+                </h1>
+                 <p class="text-base md:text-lg text-text-light max-w-2xl mx-auto mb-8 animate-on-scroll animate-fade-up" data-animate data-delay="300">
+                    Passionate about crafting clean, efficient, and user-friendly web experiences. Exploring the intersection of technology and creativity.
+                </p>
+                <div class="animate-on-scroll animate-fade-up" data-animate data-delay="400">
+                   <a href="#portfolio" class="btn btn-primary text-lg px-8 py-3 mr-3">View My Work</a>
+                   <a href="#contact" class="btn btn-secondary text-lg px-8 py-3">Get In Touch</a>
                 </div>
-                <div class="about-col-2">
-                    <h2 class="subtitle">About Me</h2>
-                    <p class="about-intro">Hello! I'm Raiyan Hasan, a passionate student pursuing my B.Tech in Information Technology at MIT Muzaffarpur. I'm fascinated by technology's potential to solve complex problems and build amazing things for the web.</p>
+            </div>
+        </div>
+         <!-- Scroll Down Hint -->
+         <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary text-2xl animate-bounce hidden md:block" aria-label="Scroll down">
+             <i class="fas fa-chevron-down"></i>
+         </a>
+    </section>
 
-                    <div class="tab-titles">
-                        <button class="tab-links active-link" onclick="opentab(event, 'skills')">Skills</button>
-                        <button class="tab-links" onclick="opentab(event, 'education')">Education</button>
+    <!-- ---------- ABOUT ---------- -->
+    <section id="about" class="py-20 md:py-28 bg-bg-surface">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap lg:flex-nowrap justify-between gap-12 md:gap-16 items-start">
+                <!-- Image Column -->
+                <div class="about-col-1 w-full lg:w-2/5 xl:w-1/3 flex-shrink-0 animate-on-scroll animate-slide-left" data-animate>
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-500"></div>
+                        <img src="./images/user1.png" alt="Raiyan Hasan profile picture" class="relative rounded-xl shadow-xl w-full max-w-sm mx-auto lg:max-w-none transition-transform duration-300 group-hover:scale-[1.02]">
+                    </div>
+                </div>
+                <!-- Text & Tabs Column -->
+                <div class="about-col-2 w-full lg:w-3/5 xl:w-2/3 animate-on-scroll animate-slide-right" data-animate>
+                    <h2 class="subtitle text-3xl md:text-4xl text-primary font-semibold mb-10 md:mb-12 text-left relative pb-4 subtitle-underline-left">
+                        About Me
+                    </h2>
+                    <p class="about-intro text-base md:text-lg text-text-light mb-8 leading-relaxed">
+                        Hello! I'm Raiyan Hasan, a dedicated student pursuing a B.Tech in Information Technology at MIT Muzaffarpur. I have a strong fascination for how technology can address complex challenges and create impactful web solutions. My journey involves continuous learning and applying skills to build intuitive and efficient digital experiences.
+                    </p>
+
+                    <!-- Tabs -->
+                    <div class="tab-titles flex border-b border-border-light mb-6 space-x-4 sm:space-x-8 flex-wrap">
+                        <button class="tab-links active-link py-2 px-1 sm:px-2 font-medium text-gray-500 border-transparent hover:text-primary hover:border-primary transition-all duration-300 whitespace-nowrap" onclick="opentab(event, 'skills')">Skills</button>
+                        <button class="tab-links py-2 px-1 sm:px-2 font-medium text-gray-500 border-transparent hover:text-primary hover:border-primary transition-all duration-300 whitespace-nowrap" onclick="opentab(event, 'education')">Education</button>
                     </div>
 
-                    <!-- Skills Tab -->
-                    <div class="tab-contents active-tab" id="skills">
-                        <ul>
-                            <li>
-                                <div class="tab-item-content">
-                                    <a href="https://www.hackerrank.com/certificates/bb25b2ccfbf1" title="Click to see certification" target="_blank" rel="noopener noreferrer"><strong>Python</strong></a>
-                                    <span>Proficient in Python programming language.</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="tab-item-content">
-                                    <strong>HTML/CSS/JavaScript</strong>
-                                    <span>Experience in front-end web development fundamentals.</span>
-                                </div>
-                            </li>
-                            <li class="hidden">
-                                <div class="tab-item-content">
-                                    <strong>Canva</strong>
-                                    <span>Proficient in graphic design using Canva.</span>
-                                </div>
-                            </li>
-                            <li class="hidden">
-                                <div class="tab-item-content">
-                                    <strong>Prompt Engineering</strong>
-                                    <span>Skilled in leveraging AI for problem-solving and automation.</span>
-                                </div>
-                            </li>
-                        </ul>
-                         <div class="more-less-controls">
-                            <button class="btn-toggle" onclick="showMoreSkills()" id="more-skills-btn" aria-label="Show more skills"><i class="fas fa-chevron-down"></i> Show More</button>
-                            <button class="btn-toggle hidden" onclick="showLessSkills()" id="less-skills-btn" aria-label="Show less skills"><i class="fas fa-chevron-up"></i> Show Less</button>
-                        </div>
-                    </div>
+                    <!-- Skills Tab Content -->
+                    <div class="tab-contents active-tab animate-fade-in min-h-[200px]" id="skills">
+                         <ul class="space-y-5">
+                             <li>
+                                 <div class="tab-item-content pl-5 border-l-4 border-primary py-2 group">
+                                     <a href="https://www.hackerrank.com/certificates/bb25b2ccfbf1" title="Click to see certification" target="_blank" rel="noopener noreferrer" class="inline-block transition-colors duration-300 group-hover:text-primary-darker">
+                                        <strong class="block text-lg font-semibold text-text-main mb-1 flex items-center">
+                                            Python <i class="fas fa-link text-xs ml-2 opacity-0 group-hover:opacity-70 transition-opacity"></i>
+                                        </strong>
+                                     </a>
+                                     <span class="block text-sm text-text-light">Proficient in Python for problem-solving and scripting.</span>
+                                 </div>
+                             </li>
+                             <li>
+                                 <div class="tab-item-content pl-5 border-l-4 border-primary py-2">
+                                     <strong class="block text-lg font-semibold text-text-main mb-1">Web Development</strong>
+                                     <span class="block text-sm text-text-light">Solid foundation in HTML, CSS, JavaScript for front-end development. Exploring frameworks.</span>
+                                 </div>
+                             </li>
+                             <li class="hidden">
+                                 <div class="tab-item-content pl-5 border-l-4 border-secondary py-2"> <!-- Different color border -->
+                                     <strong class="block text-lg font-semibold text-text-main mb-1">Canva</strong>
+                                     <span class="block text-sm text-text-light">Skilled in creating visual assets and graphics using Canva.</span>
+                                 </div>
+                             </li>
+                             <li class="hidden">
+                                 <div class="tab-item-content pl-5 border-l-4 border-accent py-2"> <!-- Different color border -->
+                                     <strong class="block text-lg font-semibold text-text-main mb-1">Prompt Engineering</strong>
+                                     <span class="block text-sm text-text-light">Developing skills in effectively leveraging AI models for various tasks.</span>
+                                 </div>
+                             </li>
+                         </ul>
+                         <div class="more-less-controls mt-6">
+                             <button class="btn-toggle text-primary text-sm font-medium inline-flex items-center hover:underline" id="more-skills-btn" aria-label="Show more skills"><i class="fas fa-chevron-down mr-1 text-xs"></i> Show More</button>
+                             <button class="btn-toggle hidden text-primary text-sm font-medium inline-flex items-center hover:underline" id="less-skills-btn" aria-label="Show less skills"><i class="fas fa-chevron-up mr-1 text-xs"></i> Show Less</button>
+                         </div>
+                     </div>
 
-                    <!-- Education Tab -->
-                    <div class="tab-contents" id="education">
-                        <ul>
-                            <li>
-                                 <div class="tab-item-content">
-                                    <a href="https://www.mitmuzaffarpur.org/mit-student/rayan-hasan/" target="_blank" rel="noopener noreferrer"><strong>Bachelor of Technology (B.Tech)</strong></a>
-                                    <span>Branch: Information Technology</span>
-                                    <span>Institution: MIT Muzaffarpur</span>
-                                    <span>(Ongoing)</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="tab-item-content">
-                                    <strong>Intermediate (12th Grade)</strong>
-                                    <span>School: St. Judes Vidyalaya, Barauni</span>
-                                    <span>Year: 2023 | Percentage: 84.6%</span>
-                                </div>
-                            </li>
-                            <li class="hidden">
-                                <div class="tab-item-content">
-                                     <a href="https://www.shivamconvent.com/images/result/10%20ST.JUDES%20BARAUNI-min.pdf" target="_blank" rel="noopener noreferrer"><strong>Matriculation (10th Grade)</strong></a>
-                                    <span>School: St. Judes Vidyalaya, Barauni</span>
-                                    <span>Year: 2021 | Percentage: 91.8%</span>
-                                </div>
-                            </li>
-                        </ul>
-                         <div class="more-less-controls">
-                            <button class="btn-toggle" onclick="showMoreEducation()" id="more-Education-btn" aria-label="Show more education details"><i class="fas fa-chevron-down"></i> Show More</button>
-                            <button class="btn-toggle hidden" onclick="showLessEducation()" id="less-Education-btn" aria-label="Show less education details"><i class="fas fa-chevron-up"></i> Show Less</button>
-                        </div>
+                    <!-- Education Tab Content -->
+                    <div class="tab-contents hidden animate-fade-in min-h-[200px]" id="education">
+                         <ul class="space-y-5">
+                             <li>
+                                  <div class="tab-item-content pl-5 border-l-4 border-primary py-2 group">
+                                     <a href="https://www.mitmuzaffarpur.org/mit-student/rayan-hasan/" target="_blank" rel="noopener noreferrer" class="inline-block transition-colors duration-300 group-hover:text-primary-darker">
+                                        <strong class="block text-lg font-semibold text-text-main mb-1 flex items-center">
+                                            Bachelor of Technology (B.Tech) <i class="fas fa-link text-xs ml-2 opacity-0 group-hover:opacity-70 transition-opacity"></i>
+                                        </strong>
+                                     </a>
+                                     <span class="block text-sm text-text-light">Branch: Information Technology</span>
+                                     <span class="block text-sm text-text-light">Institution: MIT Muzaffarpur</span>
+                                     <span class="block text-sm text-text-light font-medium text-primary">(Ongoing)</span>
+                                 </div>
+                             </li>
+                             <li>
+                                 <div class="tab-item-content pl-5 border-l-4 border-primary py-2">
+                                     <strong class="block text-lg font-semibold text-text-main mb-1">Intermediate (12th Grade)</strong>
+                                     <span class="block text-sm text-text-light">School: St. Judes Vidyalaya, Barauni</span>
+                                     <span class="block text-sm text-text-light">Year: 2023 | Percentage: 84.6%</span>
+                                 </div>
+                             </li>
+                             <li class="hidden">
+                                 <div class="tab-item-content pl-5 border-l-4 border-secondary py-2 group"> <!-- Different color -->
+                                      <a href="https://www.shivamconvent.com/images/result/10%20ST.JUDES%20BARAUNI-min.pdf" target="_blank" rel="noopener noreferrer" class="inline-block transition-colors duration-300 group-hover:text-primary-darker">
+                                         <strong class="block text-lg font-semibold text-text-main mb-1 flex items-center">
+                                             Matriculation (10th Grade) <i class="fas fa-link text-xs ml-2 opacity-0 group-hover:opacity-70 transition-opacity"></i>
+                                         </strong>
+                                      </a>
+                                     <span class="block text-sm text-text-light">School: St. Judes Vidyalaya, Barauni</span>
+                                     <span class="block text-sm text-text-light">Year: 2021 | Percentage: 91.8%</span>
+                                 </div>
+                             </li>
+                         </ul>
+                         <div class="more-less-controls mt-6">
+                             <button class="btn-toggle text-primary text-sm font-medium inline-flex items-center hover:underline" id="more-Education-btn" aria-label="Show more education details"><i class="fas fa-chevron-down mr-1 text-xs"></i> Show More</button>
+                             <button class="btn-toggle hidden text-primary text-sm font-medium inline-flex items-center hover:underline" id="less-Education-btn" aria-label="Show less education details"><i class="fas fa-chevron-up mr-1 text-xs"></i> Show Less</button>
+                         </div>
                     </div>
                 </div>
             </div>
@@ -145,258 +358,300 @@
     </section>
 
     <!-- ---------- PORTFOLIO ---------- -->
-    <section id="portfolio">
-        <div class="container">
-            <h2 class="subtitle">My Work</h2>
-            <div class="work-list">
-                <!-- Work Item 1 -->
-                <div class="work-item">
-                    <img src="./images/work-5.png" alt="Screenshot of MIT Muzaffarpur responsive website clone">
-                    <div class="layer">
-                        <h3>MIT Muzaffarpur Clone</h3>
-                        <p>A responsive clone of the MIT Muzaffarpur official website.</p>
-                        <a href="https://hasanraiyan.github.io/MIT" target="_blank" rel="noopener noreferrer" aria-label="View MIT Clone project"><i class="fas fa-external-link-alt"></i></a>
+    <section id="portfolio" class="py-20 md:py-28 bg-gradient-to-b from-blue-50 via-bg-light to-bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="subtitle text-3xl md:text-4xl text-primary font-semibold mb-12 md:mb-16 text-center relative pb-4 subtitle-underline animate-on-scroll animate-fade-up" data-animate>
+                My Work
+            </h2>
+            <div class="work-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <!-- Work Item Structure (Repeated for each item) -->
+                <div class="work-item group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface transform transition duration-300 hover:shadow-2xl hover:-translate-y-2 animate-on-scroll animate-fade-up" data-animate>
+                    <img src="./images/work-5.png" alt="MIT Muzaffarpur Clone" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+                    <!-- Glassmorphism Layer -->
+                    <div class="layer absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-700/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-6 text-center transform translate-y-4 group-hover:translate-y-0">
+                         <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
+                            <h3 class="text-xl font-semibold text-white mb-2">MIT Muzaffarpur Clone</h3>
+                            <p class="text-sm text-gray-100 mb-4">Responsive clone of the university website.</p>
+                            <a href="https://hasanraiyan.github.io/MIT" target="_blank" rel="noopener noreferrer" aria-label="View MIT Clone project" class="mt-auto bg-white text-primary rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                         </div>
                     </div>
                 </div>
-                <!-- Work Item 2 -->
-                <div class="work-item">
-                    <img src="./images/work-1.png" alt="Screenshot of Tic Tac Toe game against AI">
-                    <div class="layer">
-                        <h3>Tic Tac Toe (vs AI)</h3>
-                        <p>Play the classic game against a computer opponent. Can you beat the AI?</p>
-                        <a href="https://hasanraiyan.github.io/projects/tik%20tak%20toe/index.html" target="_blank" rel="noopener noreferrer" aria-label="View Tic Tac Toe vs AI project"><i class="fas fa-external-link-alt"></i></a>
+                 <!-- Work Item 2 -->
+                 <div class="work-item group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface transform transition duration-300 hover:shadow-2xl hover:-translate-y-2 animate-on-scroll animate-fade-up" data-animate data-delay="100">
+                    <img src="./images/work-1.png" alt="Tic Tac Toe vs AI" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+                    <div class="layer absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-700/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-6 text-center transform translate-y-4 group-hover:translate-y-0">
+                        <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
+                            <h3 class="text-xl font-semibold text-white mb-2">Tic Tac Toe (vs AI)</h3>
+                            <p class="text-sm text-gray-100 mb-4">Play the classic game against a computer opponent.</p>
+                            <a href="https://hasanraiyan.github.io/projects/tik%20tak%20toe/index.html" target="_blank" rel="noopener noreferrer" aria-label="View Tic Tac Toe vs AI project" class="mt-auto bg-white text-primary rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                  <!-- Work Item 3 -->
-                <div class="work-item">
-                    <img src="./images/work-2.png" alt="Screenshot of a web calculator">
-                    <div class="layer">
-                        <h3>Web Calculator</h3>
-                        <p>A functional calculator built with web technologies for quick calculations.</p>
-                        <a href="https://hasanraiyan.github.io/projects/calculator/index.html" target="_blank" rel="noopener noreferrer" aria-label="View Calculator project"><i class="fas fa-external-link-alt"></i></a>
+                 <div class="work-item group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface transform transition duration-300 hover:shadow-2xl hover:-translate-y-2 animate-on-scroll animate-fade-up" data-animate data-delay="200">
+                    <img src="./images/work-2.png" alt="Web Calculator" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+                    <div class="layer absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-700/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-6 text-center transform translate-y-4 group-hover:translate-y-0">
+                         <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
+                            <h3 class="text-xl font-semibold text-white mb-2">Web Calculator</h3>
+                            <p class="text-sm text-gray-100 mb-4">Functional web calculator for quick math.</p>
+                            <a href="https://hasanraiyan.github.io/projects/calculator/index.html" target="_blank" rel="noopener noreferrer" aria-label="View Calculator project" class="mt-auto bg-white text-primary rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                  <!-- Work Item 4 (Initially Hidden) -->
-                <div class="work-item hidden">
-                    <img src="./images/work-3.png" alt="Screenshot of Tic Tac Toe game for two players">
-                    <div class="layer">
-                        <h3>Tic Tac Toe (PvP)</h3>
-                        <p>Play Tic Tac Toe head-to-head against another player.</p>
-                        <a href="https://hasanraiyan.github.io/TikTakToe/" target="_blank" rel="noopener noreferrer" aria-label="View Tic Tac Toe PvP project"><i class="fas fa-external-link-alt"></i></a>
+                 <div class="work-item hidden group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface transform transition duration-300 hover:shadow-2xl hover:-translate-y-2 animate-on-scroll animate-fade-up" data-animate data-delay="0">
+                    <img src="./images/work-3.png" alt="Tic Tac Toe PvP" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+                    <div class="layer absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-700/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-6 text-center transform translate-y-4 group-hover:translate-y-0">
+                         <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
+                            <h3 class="text-xl font-semibold text-white mb-2">Tic Tac Toe (PvP)</h3>
+                            <p class="text-sm text-gray-100 mb-4">Play Tic Tac Toe head-to-head with a friend.</p>
+                            <a href="https://hasanraiyan.github.io/TikTakToe/" target="_blank" rel="noopener noreferrer" aria-label="View Tic Tac Toe PvP project" class="mt-auto bg-white text-primary rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                  <!-- Work Item 5 (Initially Hidden) -->
-                <div class="work-item hidden">
-                    <img src="./images/work-4.png" alt="Screenshot of project management app interface">
-                    <div class="layer">
-                        <h3>Project Management UI</h3>
-                        <p>A conceptual UI for managing your projects efficiently.</p>
-                        <a href="https://hasanraiyan.github.io/projects/" target="_blank" rel="noopener noreferrer" aria-label="View Project Management UI project"><i class="fas fa-external-link-alt"></i></a>
+                 <div class="work-item hidden group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface transform transition duration-300 hover:shadow-2xl hover:-translate-y-2 animate-on-scroll animate-fade-up" data-animate data-delay="100">
+                    <img src="./images/work-4.png" alt="Project Management UI" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+                    <div class="layer absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-700/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-6 text-center transform translate-y-4 group-hover:translate-y-0">
+                         <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
+                            <h3 class="text-xl font-semibold text-white mb-2">Project Management UI</h3>
+                            <p class="text-sm text-gray-100 mb-4">Conceptual UI for project tracking.</p>
+                            <a href="https://hasanraiyan.github.io/projects/" target="_blank" rel="noopener noreferrer" aria-label="View Project Management UI project" class="mt-auto bg-white text-primary rounded-full w-12 h-12 flex items-center justify-center text-xl hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-110 shadow-md">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-             <div class="portfolio-controls">
-                <button class="btn btn-secondary" onclick="showMore()" id="more-btn" aria-label="Show more projects"><i class="fas fa-chevron-down"></i> See More</button>
-                <button class="btn btn-secondary hidden" onclick="showLess()" id="less-btn" aria-label="Show fewer projects"><i class="fas fa-chevron-up"></i> See Less</button>
+             <div class="portfolio-controls text-center mt-12 md:mt-16 animate-on-scroll animate-fade-up" data-animate data-delay="300">
+                <button class="btn btn-secondary" onclick="showMore()" id="more-btn" aria-label="Show more projects">
+                    <i class="fas fa-chevron-down mr-2 text-sm"></i> See More Projects
+                </button>
+                <button class="btn btn-secondary hidden" onclick="showLess()" id="less-btn" aria-label="Show fewer projects">
+                     <i class="fas fa-chevron-up mr-2 text-sm"></i> Show Less
+                 </button>
             </div>
         </div>
     </section>
 
     <!-- ---------- CONTACT ---------- -->
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h2 class="subtitle">Contact Me</h2>
-                    <p class="contact-info"><i class="fas fa-paper-plane"></i> <a href="mailto:raiyanhasan2006@gmail.com">raiyanhasan2006@gmail.com</a></p>
-                    <!-- <p class="contact-info"><i class="fas fa-phone-square-alt"></i> Optional: +1234567890 </p> -->
-                    <div class="social-icons">
-                        <a href="https://www.hackerrank.com/profile/raiyanhasan2006" target="_blank" rel="noopener noreferrer" title="Hackerrank" aria-label="My Hackerrank profile"><i class="fab fa-hackerrank"></i></a>
-                        <a href="https://www.linkedin.com/in/hasanraiyan/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="My LinkedIn profile"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/hasanraiyan" target="_blank" rel="noopener noreferrer" title="Github" aria-label="My Github profile"><i class="fab fa-github"></i></a>
+    <section id="contact" class="py-20 md:py-28 bg-bg-surface">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap md:flex-nowrap justify-between gap-12 md:gap-16 items-start">
+                <!-- Contact Info Column -->
+                <div class="contact-left w-full md:w-2/5 lg:w-1/3 animate-on-scroll animate-slide-left" data-animate>
+                    <h2 class="subtitle text-3xl md:text-4xl text-primary font-semibold mb-8 md:mb-10 text-left relative pb-4 subtitle-underline-left">
+                        Get In Touch
+                    </h2>
+                    <p class="mb-6 text-text-light">Interested in collaborating or have a question? Feel free to reach out!</p>
+                    <div class="space-y-5">
+                        <p class="contact-info flex items-center text-text-light group">
+                            <i class="fas fa-paper-plane text-primary text-xl mr-4 w-6 text-center transition-transform duration-300 group-hover:scale-110"></i>
+                            <a href="mailto:raiyanhasan2006@gmail.com" class="hover:text-primary hover:underline break-all transition-colors duration-300">raiyanhasan2006@gmail.com</a>
+                        </p>
+                        <!-- <p class="contact-info flex items-center text-text-light group"><i class="fas fa-phone-alt text-primary text-xl mr-4 w-6 text-center transition-transform duration-300 group-hover:scale-110"></i> Optional: +1234567890 </p> -->
+                        <p class="contact-info flex items-start text-text-light group">
+                            <i class="fas fa-map-marker-alt text-primary text-xl mr-4 w-6 text-center pt-1 transition-transform duration-300 group-hover:scale-110"></i>
+                            <span>Muzaffarpur, Bihar, India</span>
+                        </p>
+                    </div>
+                    <div class="social-icons mt-10 mb-6 flex space-x-5">
+                        <a href="https://www.hackerrank.com/profile/raiyanhasan2006" target="_blank" rel="noopener noreferrer" title="Hackerrank" aria-label="My Hackerrank profile" class="text-gray-500 hover:text-[#2ec866] text-3xl transition-all duration-300 hover:-translate-y-1"><i class="fab fa-hackerrank"></i></a>
+                        <a href="https://www.linkedin.com/in/hasanraiyan/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="My LinkedIn profile" class="text-gray-500 hover:text-primary text-3xl transition-all duration-300 hover:-translate-y-1"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/hasanraiyan" target="_blank" rel="noopener noreferrer" title="Github" aria-label="My Github profile" class="text-gray-500 hover:text-gray-900 text-3xl transition-all duration-300 hover:-translate-y-1"><i class="fab fa-github"></i></a>
                     </div>
                     <!-- Optional CV Download
-                    <a href="./images/my-cv.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> Download CV</a>
+                    <a href="./images/my-cv.pdf" download class="btn btn-primary mt-8"><i class="fas fa-download mr-2"></i> Download CV</a>
                     -->
                 </div>
-                <div class="contact-right">
-                    <form name="submit-to-google-sheet" autocomplete="on">
-                        <input type="text" name="Name" placeholder="Your Name" required aria-label="Your Name">
-                        <input type="email" name="Email" placeholder="Your Email" required aria-label="Your Email">
-                        <input type="tel" name="Phone" placeholder="Your Phone (Optional)" aria-label="Your Phone Number">
-                        <textarea name="Message" placeholder="Your Message" rows="6" required aria-label="Your Message"></textarea>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                    <span id="msg"></span>
+                <!-- Contact Form Column -->
+                <div class="contact-right w-full md:w-3/5 lg:w-2/3 animate-on-scroll animate-slide-right" data-animate>
+                     <div class="content-card p-6 md:p-8 !shadow-xl"> <!-- Use content-card styling -->
+                        <h3 class="text-2xl font-semibold text-text-main mb-6">Send me a message</h3>
+                        <form name="submit-to-google-sheet" autocomplete="on" class="w-full space-y-5">
+                            <input type="text" name="Name" placeholder="Your Name" required aria-label="Your Name" class="w-full bg-gray-50 border border-border-light rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-200 text-text-main placeholder-gray-400">
+                            <input type="email" name="Email" placeholder="Your Email" required aria-label="Your Email" class="w-full bg-gray-50 border border-border-light rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-200 text-text-main placeholder-gray-400">
+                            <input type="tel" name="Phone" placeholder="Your Phone (Optional)" aria-label="Your Phone Number" class="w-full bg-gray-50 border border-border-light rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-200 text-text-main placeholder-gray-400">
+                            <textarea name="Message" placeholder="Your Message" rows="5" required aria-label="Your Message" class="w-full bg-gray-50 border border-border-light rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-200 text-text-main placeholder-gray-400 resize-y min-h-[120px]"></textarea>
+                            <button type="submit" class="btn btn-primary px-8 py-3 w-full sm:w-auto disabled:opacity-50 disabled:pointer-events-none group flex items-center justify-center">
+                                Send Message <i class="fas fa-paper-plane ml-2 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </button>
+                        </form>
+                        <!-- Feedback Message -->
+                        <div id="msg" class="mt-6 p-4 rounded-lg text-center hidden font-medium text-sm transition-all duration-300"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ---------- FOOTER ---------- -->
-    <footer class="copyright">
-        <div class="container">
-             <p>© <span id="current-year"></span> Raiyan Hasan. All rights reserved.</p>
-             <!-- Optional: Add a link back to top -->
-             <a href="#header" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+    <footer class="copyright bg-text-main text-gray-400 text-center py-6 mt-20 md:mt-28 text-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+             <p>© <span id="current-year"></span> Raiyan Hasan. Crafted with <i class="fas fa-heart text-red-500"></i> using Tailwind CSS.</p>
+             <!-- Back to top -->
+             <button id="back-to-top" onclick="scrollToTop()" class="back-to-top fixed bottom-6 right-6 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg hover:bg-primary-darker transition-all duration-300 opacity-0 pointer-events-none transform translate-y-4" aria-label="Back to top">
+                 <i class="fas fa-arrow-up"></i>
+             </button>
         </div>
     </footer>
 
     <!-- ---------- SCRIPTS ---------- -->
     <script>
-        // Tab Switching Logic
+        // --- Configuration ---
+        const SCROLL_OFFSET = 80; // Height of sticky header + buffer
+        const ANIMATION_DELAY_STEP = 100; // ms delay between staggered animations
+
+        // --- Elements ---
+        const sidemenu = document.getElementById("sidemenu");
+        const siteHeader = document.getElementById("site-header");
+        const backToTopButton = document.getElementById('back-to-top');
+        const form = document.forms['submit-to-google-sheet'];
+        const msg = document.getElementById('msg');
         const tablinks = document.querySelectorAll(".tab-links");
         const tabcontents = document.querySelectorAll(".tab-contents");
+        const navLinks = document.querySelectorAll('#main-nav .nav-link');
 
+        // --- Tab Switching Logic ---
         function opentab(event, tabname) {
-            // Use event.currentTarget for the clicked button
-            const clickedTabLink = event.currentTarget;
+            tablinks.forEach(tablink => tablink.classList.remove("active-link", "text-primary", "border-primary", "font-semibold"));
+            tabcontents.forEach(tabcontent => tabcontent.classList.add("hidden"));
 
-            tablinks.forEach(tablink => tablink.classList.remove("active-link"));
-            tabcontents.forEach(tabcontent => tabcontent.classList.remove("active-tab"));
-
-            clickedTabLink.classList.add("active-link");
-            document.getElementById(tabname).classList.add("active-tab");
+            event.currentTarget.classList.add("active-link", "text-primary", "border-primary", "font-semibold");
+            const targetTab = document.getElementById(tabname);
+            if (targetTab) {
+                targetTab.classList.remove("hidden");
+                // Trigger reflow for animation restart if needed (though fade-in is handled by class toggle)
+                // void targetTab.offsetWidth;
+                // targetTab.classList.add("animate-fade-in"); // Ensure animation class is present
+            }
         }
+        tablinks.forEach(link => link.addEventListener('click', (e) => opentab(e, e.target.getAttribute('onclick').match(/'([^']+)'/)[1]))); // Simplified binding
 
-        // Mobile Menu Logic
-        const sidemenu = document.getElementById("sidemenu");
+
+        // --- Mobile Menu Logic ---
         function openmenu() {
-            if (sidemenu) sidemenu.classList.add('active'); // Use class for state
+            if (sidemenu) {
+                sidemenu.classList.remove('translate-x-full');
+                sidemenu.classList.add('translate-x-0');
+                document.body.classList.add('overflow-hidden'); // Prevent body scroll
+            }
         }
         function closemenu() {
-            if (sidemenu) sidemenu.classList.remove('active'); // Use class for state
+            if (sidemenu) {
+                sidemenu.classList.remove('translate-x-0');
+                sidemenu.classList.add('translate-x-full');
+                document.body.classList.remove('overflow-hidden');
+            }
         }
-
-        // Close menu when a link is clicked (optional but good UX)
-        document.querySelectorAll('#sidemenu li a').forEach(link => {
+        document.querySelectorAll('#sidemenu a').forEach(link => {
             link.addEventListener('click', closemenu);
         });
 
 
-        // Google Sheet Form Submission Logic
+        // --- Google Sheet Form Submission Logic ---
         const scriptURL = 'https://script.google.com/macros/s/AKfycbw0qBBh43wiVS4iRn6d4jqazeOGIq8U62JjdfFHnGKsbT2mTBbmXIZ_jezCEZccnIMr/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const msg = document.getElementById('msg');
-
         if (form) {
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 const submitButton = form.querySelector('button[type="submit"]');
-                const originalButtonText = submitButton.innerHTML;
+                const originalButtonHTML = submitButton.innerHTML; // Store full HTML
                 submitButton.disabled = true;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...'; // Loading indicator
+                submitButton.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Sending...`;
 
                 fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                    .then(response => {
-                        if (msg) msg.textContent = "Message sent successfully!"; // Use textContent
-                        if (msg) msg.style.display = 'block'; // Make sure message is visible
-                        if (form) form.reset(); // Clear the form
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        if (msg) {
+                            msg.textContent = "Message sent successfully! Thank you.";
+                            msg.className = 'mt-6 p-4 rounded-lg text-center font-medium text-sm bg-green-100 border border-green-300 text-green-700 block animate-fade-in';
+                        }
+                        if (form) form.reset();
                         setTimeout(() => {
-                            if (msg) msg.textContent = ''; // Clear message after a delay
-                             if (msg) msg.style.display = 'none';
+                             if (msg) {
+                                msg.classList.remove('animate-fade-in'); // Prepare for fade out
+                                msg.classList.add('opacity-0'); // Start fade out
+                                setTimeout(() => msg.classList.add('hidden'), 500); // Hide after fade
+                             }
                         }, 5000);
                     })
                     .catch(error => {
-                         console.error('Error!', error.message);
-                         if (msg) msg.textContent = "Error sending message. Please try again.";
-                         if (msg) msg.style.display = 'block';
-                         if (msg) msg.style.color = 'red'; // Indicate error
-                     })
+                        console.error('Error!', error.message);
+                        if (msg) {
+                            msg.textContent = "Oops! Error sending message. Please try again later.";
+                            msg.className = 'mt-6 p-4 rounded-lg text-center font-medium text-sm bg-red-100 border border-red-300 text-red-700 block animate-fade-in';
+                             // Optional: Keep error message visible longer or until dismissed
+                        }
+                    })
                     .finally(() => {
-                        submitButton.disabled = false; // Re-enable button
-                        submitButton.innerHTML = originalButtonText; // Restore button text
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonHTML; // Restore original HTML
                     });
             });
         }
 
 
-        // Portfolio Show More/Less Logic
-        const works = document.querySelectorAll('.work-item'); // Use querySelectorAll
-        const moreBtn = document.getElementById('more-btn');
-        const lessBtn = document.getElementById('less-btn');
-        const initialVisibleCount = 3; // Number of items visible initially
+        // --- Show More/Less Logic (Generic) ---
+        function setupToggle(containerSelector, itemSelector, moreBtnId, lessBtnId, initialVisible) {
+            const container = document.querySelector(containerSelector);
+            const items = container ? Array.from(container.querySelectorAll(itemSelector)) : [];
+            const moreBtn = document.getElementById(moreBtnId);
+            const lessBtn = document.getElementById(lessBtnId);
 
-        function showMore() {
-            works.forEach(work => work.classList.remove('hidden'));
-            if (moreBtn) moreBtn.classList.add('hidden');
-            if (lessBtn) lessBtn.classList.remove('hidden');
-        }
-
-        function showLess() {
-            works.forEach((work, index) => {
-                if (index >= initialVisibleCount) {
-                    work.classList.add('hidden');
-                }
-            });
-            if (moreBtn) moreBtn.classList.remove('hidden');
-            if (lessBtn) lessBtn.classList.add('hidden');
-        }
-
-        // Run showLess initially if there are more items than the initial count
-        if (works.length > initialVisibleCount) {
-           showLess(); // Hide extra items on load
-        } else {
-            // If fewer items than initial count, hide both buttons
-             if(moreBtn) moreBtn.classList.add('hidden');
-             if(lessBtn) lessBtn.classList.add('hidden');
-        }
-
-
-        // Skills Show More/Less Logic
-        const skillsList = document.querySelector("#skills ul");
-        const skillItems = skillsList ? skillsList.children : [];
-        const moreSkillsBtn = document.getElementById('more-skills-btn');
-        const lessSkillsBtn = document.getElementById('less-skills-btn');
-        const initialVisibleSkills = 2;
-
-        function setupToggle(items, moreBtn, lessBtn, initialVisible) {
-            if (!items || items.length <= initialVisible) {
-                if (moreBtn) moreBtn.style.display = 'none'; // Use display none
+            if (!container || !moreBtn || !lessBtn || items.length <= initialVisible) {
+                if (moreBtn) moreBtn.style.display = 'none'; // Use style for potential override issues
                 if (lessBtn) lessBtn.style.display = 'none';
-                return; // Exit if not needed
+                items.forEach(item => item.classList.remove('hidden'));
+                return;
             }
 
-             // Initially hide extra items
-            for (let i = initialVisible; i < items.length; i++) {
-                items[i].classList.add('hidden');
-            }
-             if (moreBtn) moreBtn.classList.remove('hidden');
-             if (lessBtn) lessBtn.classList.add('hidden');
+            const updateVisibility = (showAll) => {
+                items.forEach((item, index) => {
+                     // Only toggle items beyond the initial visible count
+                     if (index >= initialVisible) {
+                         item.classList.toggle('hidden', !showAll);
+                         // Add animation class when showing
+                         if (showAll) {
+                             item.classList.add('animate-fade-in');
+                             // Optionally remove animation class after it finishes if needed
+                             // setTimeout(() => item.classList.remove('animate-fade-in'), 600);
+                         } else {
+                             item.classList.remove('animate-fade-in');
+                         }
+                     }
+                });
+                moreBtn.classList.toggle('hidden', showAll);
+                lessBtn.classList.toggle('hidden', !showAll);
+            };
 
+             // Initial setup: hide items beyond the limit
+             items.forEach((item, index) => {
+                 if (index >= initialVisible) {
+                     item.classList.add('hidden');
+                 }
+             });
+             moreBtn.classList.remove('hidden'); // Ensure more button is visible initially
+             lessBtn.classList.add('hidden'); // Ensure less button is hidden initially
 
-            if (moreBtn) {
-                 moreBtn.onclick = () => {
-                    for (let i = 0; i < items.length; i++) {
-                        items[i].classList.remove('hidden');
-                    }
-                    moreBtn.classList.add('hidden');
-                    if (lessBtn) lessBtn.classList.remove('hidden');
-                 };
-            }
+             // Add event listeners
+             moreBtn.onclick = () => updateVisibility(true);
+             lessBtn.onclick = () => updateVisibility(false);
 
-             if (lessBtn) {
-                 lessBtn.onclick = () => {
-                    for (let i = initialVisible; i < items.length; i++) {
-                        items[i].classList.add('hidden');
-                    }
-                    if (moreBtn) moreBtn.classList.remove('hidden');
-                    lessBtn.classList.add('hidden');
-                };
+             // Ensure initial visible buttons state reflects item count
+             if (items.length <= initialVisible) {
+                 moreBtn.classList.add('hidden');
+                 lessBtn.classList.add('hidden');
              }
         }
-
-        setupToggle(skillItems, moreSkillsBtn, lessSkillsBtn, initialVisibleSkills);
-
-
-        // Education Show More/Less Logic (using the same setup function)
-        const educationList = document.querySelector("#education ul");
-        const educationItems = educationList ? educationList.children : [];
-        const moreEducationBtn = document.getElementById('more-Education-btn');
-        const lessEducationBtn = document.getElementById('less-Education-btn');
-        const initialVisibleEducation = 2;
-
-        setupToggle(educationItems, moreEducationBtn, lessEducationBtn, initialVisibleEducation);
 
         // --- Footer Current Year ---
         const currentYearSpan = document.getElementById('current-year');
@@ -404,33 +659,180 @@
             currentYearSpan.textContent = new Date().getFullYear();
         }
 
-        // --- Smooth Scrolling ---
+
+        // --- Smooth Scrolling & Active Nav Link ---
+        function smoothScrollTo(targetElement) {
+             const headerOffset = siteHeader ? siteHeader.offsetHeight : 70;
+             const elementPosition = targetElement.getBoundingClientRect().top;
+             const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 15; // Extra buffer
+
+             window.scrollTo({
+                 top: offsetPosition,
+                 behavior: "smooth"
+             });
+        }
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Prevent default only if it's an internal link
-                if (this.hash !== "") {
-                    e.preventDefault();
-                    const hash = this.hash;
+                const hash = this.hash;
+                if (hash !== "" && hash !== "#") {
                     const targetElement = document.querySelector(hash);
                     if (targetElement) {
-                       const headerOffset = document.getElementById('header') ? document.getElementById('header').offsetHeight : 60; // Adjust if header height changes or is fixed
-                       const elementPosition = targetElement.getBoundingClientRect().top;
-                       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                       window.scrollTo({
-                           top: offsetPosition,
-                           behavior: "smooth"
-                       });
-                        // Optionally update URL hash without jumping
-                        // history.pushState(null, null, hash);
+                        e.preventDefault();
+                        smoothScrollTo(targetElement);
+                        // Optionally close mobile menu if open and link is inside it
+                        if(sidemenu && sidemenu.contains(this)) {
+                            closemenu();
+                        }
                     }
                 }
             });
         });
 
+        // Update active nav link on scroll
+        function updateActiveNavLink() {
+            let currentSection = '';
+            const sections = document.querySelectorAll('section[id]');
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - SCROLL_OFFSET - 50; // Adjust threshold
+                if (window.pageYOffset >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+             // Handle hero section separately if needed (often top of page)
+             if (window.pageYOffset < document.getElementById('about').offsetTop - SCROLL_OFFSET - 50) {
+                 currentSection = 'hero';
+             }
+
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav', 'text-primary'); // Remove active styles
+                 link.classList.remove('font-semibold'); // Ensure non-active are not bold
+                link.style.setProperty('--tw-gradient-from', 'transparent'); // Reset gradient for underline
+
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active-nav', 'text-primary', 'font-semibold'); // Add active styles
+                     // Trigger underline animation
+                     // Note: The ::after pseudo-element handles the visual style via CSS
+                }
+            });
+        }
+
+
+        // --- Header Style & Back-to-Top Button on Scroll ---
+        function handleScroll() {
+            const scrollPosition = window.scrollY;
+
+            // Header glass effect
+            if (siteHeader) {
+                if (scrollPosition > 50) {
+                    siteHeader.classList.add('shadow-lg', 'glass-effect');
+                } else {
+                    siteHeader.classList.remove('shadow-lg', 'glass-effect');
+                }
+            }
+
+            // Back to top button visibility
+            if (backToTopButton) {
+                if (scrollPosition > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    backToTopButton.classList.add('opacity-100', 'transform-none');
+                } else {
+                    backToTopButton.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    backToTopButton.classList.remove('opacity-100', 'transform-none');
+                }
+            }
+
+             // Update active nav link
+             updateActiveNavLink();
+        }
+
+        function scrollToTop() {
+             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        if (backToTopButton) {
+            backToTopButton.addEventListener('click', scrollToTop);
+        }
+
+
+        // --- Scroll Animations using Intersection Observer ---
+        function setupScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+            if (!('IntersectionObserver' in window)) {
+                // Fallback for older browsers: just show elements immediately
+                animatedElements.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = parseInt(entry.target.dataset.delay || '0', 10);
+                        setTimeout(() => {
+                             entry.target.classList.add('is-visible');
+                             // Determine animation type from class list
+                             if (entry.target.classList.contains('animate-fade-up')) entry.target.classList.add('translate-y-0');
+                             if (entry.target.classList.contains('animate-slide-left')) entry.target.classList.add('translate-x-0');
+                             if (entry.target.classList.contains('animate-slide-right')) entry.target.classList.add('translate-x-0');
+
+                             observer.unobserve(entry.target); // Optional: stop observing once visible
+                         }, delay);
+                    }
+                });
+            }, {
+                root: null, // Use the viewport
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            animatedElements.forEach(el => observer.observe(el));
+        }
+
+
+        // --- Initial Setup on DOMContentLoaded ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setupToggle("#skills ul", "#skills ul > li", 'more-skills-btn', 'less-skills-btn', 2);
+            setupToggle("#education ul", "#education ul > li", 'more-Education-btn', 'less-Education-btn', 2);
+            setupToggle('#portfolio .work-list', '#portfolio .work-item', 'more-btn', 'less-btn', 3); // For portfolio
+            handleScroll(); // Initial check for header/button state
+            setupScrollAnimations(); // Set up intersection observer
+            updateActiveNavLink(); // Set initial active link
+
+             // Add stagger delay to initial portfolio items for sequential animation
+             const initialPortfolioItems = document.querySelectorAll('#portfolio .work-list .work-item:not(.hidden)');
+             initialPortfolioItems.forEach((item, index) => {
+                 if (!item.dataset.delay) { // Only add delay if not already set
+                    item.dataset.delay = index * ANIMATION_DELAY_STEP;
+                 }
+             });
+
+             // Re-apply animation setup if portfolio items change visibility
+             const portfolioObserver = new MutationObserver((mutations) => {
+                 mutations.forEach(mutation => {
+                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                         const targetElement = mutation.target;
+                         // If an item becomes visible (no longer hidden) and isn't already marked as visible by IO
+                         if (!targetElement.classList.contains('hidden') && !targetElement.classList.contains('is-visible')) {
+                            // You might re-add it to the observer or manually trigger its animation
+                            // For simplicity, we rely on the initial IO setup, but this is where you'd handle dynamic visibility changes impacting animations.
+                            // console.log('Portfolio item visibility changed:', targetElement);
+                         }
+                     }
+                 });
+             });
+             const workList = document.querySelector('#portfolio .work-list');
+             if(workList) {
+                 portfolioObserver.observe(workList, { attributes: true, subtree: true, attributeFilter: ['class'] });
+             }
+        });
+
+        // --- Event Listeners ---
+        window.addEventListener('scroll', handleScroll, { passive: true }); // Use passive listener for scroll performance
 
     </script>
 
 </body>
-
 </html>
