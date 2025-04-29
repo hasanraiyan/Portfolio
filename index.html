@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raiyan Hasan - Web Developer Portfolio </title>
     <meta name="description"
-        content="Welcome to the enhanced portfolio of Raiyan Hasan (v3.5), an IT student at MIT Muzaffarpur. Features enhanced UI, interactive elements (Typed.js, filters), micro-interactions, animations, CV download, accessible modals, and a functional contact form UI.">
+        content="Welcome to the enhanced portfolio of Raiyan Hasan (v3.6 - Dynamic), an IT student at MIT Muzaffarpur. Features dynamically rendered projects, enhanced filters, UI improvements, interactive elements (Typed.js), micro-interactions, animations, CV download, accessible modals, and a functional contact form UI.">
     <meta name="keywords"
-        content="Raiyan Hasan, web developer, portfolio, MIT Muzaffarpur, MERN Stack, React, Node.js, JavaScript, Tailwind CSS, front-end developer, student developer, dark mode, accessible portfolio, interactive portfolio, Typed.js, portfolio filters, resume download, contact form UI, ui improvements, microinteractions">
+        content="Raiyan Hasan, web developer, portfolio, MIT Muzaffarpur, MERN Stack, React, Node.js, JavaScript, Tailwind CSS, front-end developer, student developer, dark mode, accessible portfolio, interactive portfolio, Typed.js, portfolio filters, dynamic portfolio, resume download, contact form UI, ui improvements, microinteractions, javascript portfolio">
     <meta name="author" content="Raiyan Hasan">
     <link rel="canonical" href="https://hasanraiyan.github.io/Portfolio/"> <!-- UPDATE if you host elsewhere -->
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Raiyan Hasan - Interactive Web Developer Portfolio v3.5">
+    <meta property="og:title" content="Raiyan Hasan - Dynamic Web Developer Portfolio v3.6">
     <meta property="og:description"
-        content="Explore the interactive web development portfolio of Raiyan Hasan (v3.5), student at MIT Muzaffarpur. Featuring Typed.js intro, project filters, UI improvements, micro-interactions, preloader, CV download, accessible modals, and contact form UI.">
+        content="Explore the dynamic web development portfolio of Raiyan Hasan (v3.6), student at MIT Muzaffarpur. Featuring dynamically rendered projects, Typed.js intro, improved project filters, UI improvements, micro-interactions, preloader, CV download, accessible modals, and contact form UI.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hasanraiyan.github.io/Portfolio/"> <!-- UPDATE if you host elsewhere -->
     <meta property="og:image" content="https://hasanraiyan.github.io/Portfolio/images/user1.png"> <!-- Ensure path -->
@@ -24,9 +24,9 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Raiyan Hasan - Interactive Web Developer Portfolio v3.5">
+    <meta name="twitter:title" content="Raiyan Hasan - Dynamic Web Developer Portfolio v3.6">
     <meta name="twitter:description"
-        content="Explore the interactive web development portfolio of Raiyan Hasan (v3.5), student at MIT Muzaffarpur. Featuring Typed.js intro, project filters, UI improvements, micro-interactions, preloader, CV download, accessible modals, and contact form UI.">
+        content="Explore the dynamic web development portfolio of Raiyan Hasan (v3.6), student at MIT Muzaffarpur. Featuring dynamically rendered projects, Typed.js intro, improved project filters, UI improvements, micro-interactions, preloader, CV download, accessible modals, and contact form UI.">
     <meta name="twitter:image" content="https://hasanraiyan.github.io/Portfolio/images/user1.png"> <!-- Ensure path -->
     <meta name="twitter:image:alt" content="Raiyan Hasan Profile Picture">
 
@@ -287,6 +287,11 @@
             .show-more-item {
                  @apply opacity-0 /* Start hidden for animation */;
             }
+             /* Style for items hidden by show/less, separate from filter hiding */
+            .work-item.show-more-item-hidden {
+                 @apply !opacity-0 !pointer-events-none !h-0 !p-0 !m-0 !border-0 overflow-hidden; /* More robust hiding for layout */
+                 transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Add transition for reveal */
+            }
             .show-more-item.animate-in {
                  @apply animate-show-more-item;
             }
@@ -296,21 +301,21 @@
                  @apply absolute inset-0 bg-gradient-to-t from-blue-800/80 via-blue-700/70 to-transparent dark:from-blue-900/80 dark:via-blue-800/70 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-4 sm:p-6 text-center transform translate-y-4 group-hover:translate-y-0;
             }
              /* Portfolio Filter Button */
-             .filter-btn.active {
+             .filter-btn.active { /* Base active styles */
                  @apply bg-primary/10 dark:bg-dark-primary/10 text-primary dark:text-dark-primary font-semibold;
              }
              /* Portfolio Item transition for filtering */
              .work-item {
                  @apply transition-opacity duration-300 ease-out transform transition-transform duration-300 ease-out;
              }
-             .work-item.hidden {
-                 /* Already handled by utility layer or JS, but ensure opacity/scale for transition */
-                 @apply !opacity-0 !scale-95;
+             .work-item.hidden { /* Style for items hidden by FILTERING */
+                 @apply !opacity-0 !scale-95 !pointer-events-none;
+                 /* Use !important carefully if needed, but utility classes below should handle it */
              }
         }
         @layer utilities {
-            /* Ensure hidden utility takes precedence */
-            .btn-toggle.hidden, .btn.hidden, .work-item.hidden { display: none !important; }
+            /* Ensure hidden utility takes precedence for filter hiding */
+            .hidden { display: none !important; }
 
             /* Portfolio hover icon animation */
             .work-item .layer a:hover i, .work-item .layer button:hover i { @apply rotate-[360deg] transition-transform duration-500; }
@@ -751,219 +756,25 @@
                     My Work
                 </h2>
 
-                <!-- Added Portfolio Filters -->
+                <!-- Portfolio Filters (Container for dynamic buttons) -->
                 <div id="portfolio-filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12 animate-on-scroll animate-fade-up" data-animate data-delay="100">
-                    <button class="filter-btn active px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 dark:bg-dark-primary/10 text-primary dark:text-dark-primary transition" data-filter="all">All</button>
-                    <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium text-text-light dark:text-dark-text-light hover:bg-gray-100 dark:hover:bg-dark-bg-surface transition" data-filter="React">React/Native</button>
-                    <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium text-text-light dark:text-dark-text-light hover:bg-gray-100 dark:hover:bg-dark-bg-surface transition" data-filter="JavaScript">Vanilla JS</button>
-                    <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium text-text-light dark:text-dark-text-light hover:bg-gray-100 dark:hover:bg-dark-bg-surface transition" data-filter="Tailwind">Tailwind CSS</button>
-                    <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium text-text-light dark:text-dark-text-light hover:bg-gray-100 dark:hover:bg-dark-bg-surface transition" data-filter="AI">AI/Chatbot</button>
+                    <!-- Filter buttons will be generated here by JavaScript -->
                 </div>
 
-                <div class="work-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-
-                    <!-- Project 1: MIT Clone -->
-                    <div class="work-item group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 animate-on-scroll animate-fade-up"
-                         data-animate data-modal-title="MIT Muzaffarpur Clone"
-                         data-modal-desc="A responsive clone of the official MIT Muzaffarpur website, built using HTML, CSS (Tailwind), and JavaScript. Focused on replicating the design, layout, and key interactive elements."
-                         data-modal-tech="HTML, Tailwind CSS, JavaScript"
-                         data-modal-learnings="Practiced complex layouts with Tailwind, implementing responsive navigation, and mimicking existing UI patterns accurately."
-                         data-modal-live="https://hasanraiyan.github.io/MIT" data-modal-repo="" data-tilt> <!-- Added data-tilt -->
-                        <img src="./images/work-5.png" alt="MIT Muzaffarpur Clone"
-                            class="w-full h-72 sm:h-80 md:h-96 object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                            loading="lazy">
-                        <div class="layer"> <!-- Classes moved to CSS -->
-                            <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
-                                <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">MIT Muzaffarpur Clone</h3>
-                                <p class="text-xs sm:text-sm text-gray-100 mb-3">Responsive university website clone.</p>
-                                <div class="flex justify-center space-x-3">
-                                    <button onclick="openProjectModal(this.closest('.work-item'))" aria-label="View details for MIT Clone project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                        <i class="fas fa-info"></i>
-                                    </button>
-                                    <a href="https://hasanraiyan.github.io/MIT" target="_blank" rel="noopener noreferrer" aria-label="View live MIT Clone project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: Tic Tac Toe vs AI -->
-                    <div class="work-item group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 animate-on-scroll animate-fade-up"
-                         data-animate data-delay="100" data-modal-title="Tic Tac Toe (vs AI)"
-                         data-modal-desc="Classic Tic Tac Toe game where you can play against a simple computer opponent implemented with JavaScript logic. Includes win detection and game reset functionality."
-                         data-modal-tech="HTML, CSS, JavaScript"
-                         data-modal-learnings="Implemented game logic, including win condition checks and a basic AI opponent strategy using vanilla JavaScript."
-                         data-modal-live="https://hasanraiyan.github.io/projects/tik%20tak%20toe/index.html" data-modal-repo="" data-tilt> <!-- Added data-tilt -->
-                        <img src="./images/work-1.png" alt="Tic Tac Toe vs AI"
-                            class="w-full h-72 sm:h-80 md:h-96 object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                            loading="lazy">
-                        <div class="layer">
-                            <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
-                                <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Tic Tac Toe (vs AI)</h3>
-                                <p class="text-xs sm:text-sm text-gray-100 mb-3">Play against the computer.</p>
-                                <div class="flex justify-center space-x-3">
-                                    <button onclick="openProjectModal(this.closest('.work-item'))" aria-label="View details for Tic Tac Toe vs AI project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                        <i class="fas fa-info"></i>
-                                    </button>
-                                    <a href="https://hasanraiyan.github.io/projects/tik%20tak%20toe/index.html" target="_blank" rel="noopener noreferrer" aria-label="View live Tic Tac Toe vs AI project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3: Calculator -->
-                    <div class="work-item group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 animate-on-scroll animate-fade-up"
-                         data-animate data-delay="200" data-modal-title="Web Calculator"
-                         data-modal-desc="A functional web-based calculator built with HTML, CSS, and JavaScript. It handles basic arithmetic operations (+, -, *, /) and includes display updates and clear functionality."
-                         data-modal-tech="HTML, CSS, JavaScript"
-                         data-modal-learnings="Focused on DOM manipulation with JavaScript to handle user input, update the display, and perform calculations."
-                         data-modal-live="https://hasanraiyan.github.io/projects/calculator/index.html" data-modal-repo="" data-tilt> <!-- Added data-tilt -->
-                        <img src="./images/work-2.png" alt="Web Calculator"
-                            class="w-full h-72 sm:h-80 md:h-96 object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                            loading="lazy">
-                        <div class="layer">
-                             <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
-                                <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Web Calculator</h3>
-                                <p class="text-xs sm:text-sm text-gray-100 mb-3">Functional calculator for quick math.</p>
-                                <div class="flex justify-center space-x-3">
-                                     <button onclick="openProjectModal(this.closest('.work-item'))" aria-label="View details for Calculator project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                         <i class="fas fa-info"></i>
-                                     </button>
-                                     <a href="https://hasanraiyan.github.io/projects/calculator/index.html" target="_blank" rel="noopener noreferrer" aria-label="View live Calculator project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                         <i class="fas fa-external-link-alt"></i>
-                                     </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hidden Portfolio Items Wrapper -->
-                    <div id="portfolio-list-hidden" class="contents">
-
-                        <!-- Project 4: Tic Tac Toe PvP -->
-                        <div class="work-item hidden group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 show-more-item"
-                             data-animate data-delay="0" data-modal-title="Tic Tac Toe (Player vs Player)"
-                             data-modal-desc="Play the classic Tic Tac Toe game head-to-head against another player on the same device. Simple, fun, and includes turn indicators and win detection."
-                             data-modal-tech="HTML, CSS, JavaScript"
-                             data-modal-learnings="Refined basic game logic and state management for a two-player experience."
-                             data-modal-live="https://hasanraiyan.github.io/TikTakToe/" data-modal-repo="https://github.com/hasanraiyan/TikTakToe" data-tilt> <!-- Added data-tilt -->
-                            <img src="./images/work-3.png" alt="Tic Tac Toe PvP"
-                                class="w-full h-72 sm:h-80 md:h-96 object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                                loading="lazy">
-                            <div class="layer">
-                                <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
-                                    <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Tic Tac Toe (PvP)</h3>
-                                    <p class="text-xs sm:text-sm text-gray-100 mb-3">Play head-to-head with a friend.</p>
-                                    <div class="flex justify-center space-x-3">
-                                        <button onclick="openProjectModal(this.closest('.work-item'))" aria-label="View details for Tic Tac Toe PvP project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fas fa-info"></i>
-                                        </button>
-                                        <a href="https://hasanraiyan.github.io/TikTakToe/" target="_blank" rel="noopener noreferrer" aria-label="View live Tic Tac Toe PvP project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fas fa-external-link-alt"></i>
-                                        </a>
-                                        <a href="https://github.com/hasanraiyan/TikTakToe" target="_blank" rel="noopener noreferrer" aria-label="View Tic Tac Toe PvP source code on Github" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fab fa-github"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 5: Project Management UI -->
-                        <div class="work-item hidden group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 show-more-item"
-                             data-animate data-delay="100" data-modal-title="Project Management UI (Concept)"
-                             data-modal-desc="A conceptual user interface design for a project management dashboard. Focuses on clean layout, component structure (cards, sidebars), and visual hierarchy using Tailwind CSS. This is primarily a design showcase."
-                             data-modal-tech="HTML, Tailwind CSS"
-                             data-modal-learnings="Practiced translating UI concepts into functional HTML/CSS using Tailwind utilities for layout and styling. Focused on component-based structure."
-                             data-modal-live="https://hasanraiyan.github.io/projects/" data-modal-repo="" data-tilt> <!-- Added data-tilt -->
-                            <img src="./images/work-4.png" alt="Project Management UI"
-                                class="w-full h-72 sm:h-80 md:h-96 object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                                loading="lazy">
-                             <div class="layer">
-                                <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
-                                    <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Project Management UI</h3>
-                                    <p class="text-xs sm:text-sm text-gray-100 mb-3">Conceptual UI for project tracking.</p>
-                                    <div class="flex justify-center space-x-3">
-                                        <button onclick="openProjectModal(this.closest('.work-item'))" aria-label="View details for Project Management UI project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fas fa-info"></i>
-                                        </button>
-                                        <a href="https://hasanraiyan.github.io/projects/" target="_blank" rel="noopener noreferrer" aria-label="View live Project Management UI project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fas fa-external-link-alt"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 6: NoteJS App -->
-                        <div class="work-item hidden group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 show-more-item"
-                             data-animate data-delay="200" data-modal-title="NoteJS - Simple Notes App"
-                             data-modal-desc="NoteJS is a basic notes application built with React Native and Expo. It allows users to create, edit, delete, and save notes locally on their device."
-                             data-modal-tech="React Native, Expo, JavaScript"
-                             data-modal-learnings="Developed a cross-platform mobile app, implemented local data storage using AsyncStorage, managed component state for CRUD operations (Create, Read, Update, Delete)."
-                             data-modal-live="" data-modal-repo="https://github.com/hasanraiyan/NoteJS" data-tilt> <!-- Added data-tilt -->
-                            <img src="https://github.com/hasanraiyan/NoteJS/raw/main/assets/images/apps/HomeScreen.png" alt="NoteJS App Home Screen"
-                                class="w-full h-72 sm:h-80 md:h-96 object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                                loading="lazy">
-                            <div class="layer">
-                                <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
-                                    <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">NoteJS App</h3>
-                                    <p class="text-xs sm:text-sm text-gray-100 mb-3">Simple notes app built with React Native.</p>
-                                    <div class="flex justify-center space-x-3">
-                                        <button onclick="openProjectModal(this.closest('.work-item'))" aria-label="View details for NoteJS App project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fas fa-info"></i>
-                                        </button>
-                                        <a href="https://github.com/hasanraiyan/NoteJS" target="_blank" rel="noopener noreferrer" aria-label="View NoteJS source code on Github" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fab fa-github"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Project 7: Dostify AI Companion -->
-                        <div class="work-item hidden group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 show-more-item"
-                             data-animate data-delay="300"
-                             data-modal-title="Dostify - AI Student Companion"
-                             data-modal-desc="An AI-powered chatbot designed as a friendly companion for students, helping them navigate academic pressure, mental health challenges, and career uncertainty with personalized support, resources, and conversation starters."
-                             data-modal-tech="React, Next.js, Tailwind CSS, AI Integration (e.g., OpenAI), Chatbot"
-                             data-modal-learnings="Developed an interactive chatbot interface, integrated with an AI backend (presumed), designed user journeys for various student needs (academic, mental health, career), built a responsive landing page showcasing features and benefits."
-                             data-modal-live="https://dostify-climb.vercel.app/" data-modal-repo="" data-tilt> <!-- Added data-tilt -->
-                            <img src="https://dostify-climb.vercel.app/images/app-icon.png" alt="Dostify AI Companion Landing Page"
-                                class="w-full h-72 sm:h-80 md:h-96 object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                                loading="lazy"> <!-- Changed object-top to object-center -->
-                            <div class="layer">
-                                <div class="glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95">
-                                    <h3 class="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Dostify AI Companion</h3>
-                                    <p class="text-xs sm:text-sm text-gray-100 mb-3">AI chatbot providing support for students.</p>
-                                    <div class="flex justify-center space-x-3">
-                                        <button onclick="openProjectModal(this.closest('.work-item'))" aria-label="View details for Dostify AI Companion project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fas fa-info"></i>
-                                        </button>
-                                        <a href="https://dostify-climb.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="View live Dostify project" class="bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg">
-                                            <i class="fas fa-external-link-alt"></i>
-                                        </a>
-                                        <!-- GitHub link omitted as none was provided -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div> <!-- End #portfolio-list-hidden -->
+                <!-- Portfolio Grid (Container for dynamic items) -->
+                <div id="portfolio-work-list" class="work-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                    <!-- Portfolio items will be dynamically rendered here -->
                 </div>
 
                 <!-- Portfolio Show More/Less Buttons -->
                 <div class="portfolio-controls text-center mt-12 md:mt-16 animate-on-scroll animate-fade-up"
                     data-animate data-delay="300">
-                    <button class="btn btn-secondary" onclick="showMorePortfolio()" id="more-btn"
-                        aria-label="Show more projects" aria-expanded="false" aria-controls="portfolio-list-hidden">
+                    <button class="btn btn-secondary hidden" id="more-btn" <!-- Initially hidden, JS will show if needed -->
+                        aria-label="Show more projects" aria-expanded="false">
                         <i class="fas fa-chevron-down mr-2 text-sm"></i> See More Projects
                     </button>
-                    <button class="btn btn-secondary hidden" onclick="showLessPortfolio()" id="less-btn"
-                        aria-label="Show fewer projects" aria-expanded="true" aria-controls="portfolio-list-hidden">
+                    <button class="btn btn-secondary hidden" id="less-btn"
+                        aria-label="Show fewer projects" aria-expanded="true">
                         <i class="fas fa-chevron-up mr-2 text-sm"></i> Show Less
                     </button>
                 </div>
@@ -1176,13 +987,271 @@
         </div>
     </footer>
 
-    <!-- Main JavaScript (Updated with Typed.js, Tilt, Filters) -->
+    <!-- Main JavaScript (Updated with Dynamic Portfolio) -->
     <script>
         // --- Global Constants ---
         const SCROLL_OFFSET = 80;
-        const ANIMATION_DELAY_STEP = 100; // Stagger delay for portfolio items
+        const ANIMATION_DELAY_STEP = 100; // Stagger delay for initial portfolio items
         const SHOW_MORE_STAGGER = 50; // ms delay between each new item appearing
         const FOCUSABLE_MODAL_ELEMENTS = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        const PORTFOLIO_INITIAL_VISIBLE_COUNT = 3; // Number of portfolio items visible initially
+
+        // --- Portfolio Project Data ---
+        const portfolioData = [
+            {
+                id: 'mit-clone',
+                title: 'MIT Muzaffarpur Clone',
+                imageSrc: './images/work-5.png',
+                imageAlt: 'MIT Muzaffarpur Clone',
+                shortDesc: 'Responsive university website clone.',
+                modalTitle: 'MIT Muzaffarpur Clone',
+                modalDesc: 'A responsive clone of the official MIT Muzaffarpur website, built using HTML, CSS (Tailwind), and JavaScript. Focused on replicating the design, layout, and key interactive elements.',
+                modalTech: ['HTML', 'Tailwind CSS', 'JavaScript'],
+                modalLearnings: 'Practiced complex layouts with Tailwind, implementing responsive navigation, and mimicking existing UI patterns accurately.',
+                liveLink: 'https://hasanraiyan.github.io/MIT',
+                repoLink: null, // Use null if no link
+                tags: ['Tailwind', 'JavaScript', 'Clone', 'Frontend'],
+                initiallyHidden: false,
+                animationDelay: 0
+            },
+            {
+                id: 'ttt-ai',
+                title: 'Tic Tac Toe (vs AI)',
+                imageSrc: './images/work-1.png',
+                imageAlt: 'Tic Tac Toe vs AI',
+                shortDesc: 'Play against the computer.',
+                modalTitle: 'Tic Tac Toe (vs AI)',
+                modalDesc: 'Classic Tic Tac Toe game where you can play against a simple computer opponent implemented with JavaScript logic. Includes win detection and game reset functionality.',
+                modalTech: ['HTML', 'CSS', 'JavaScript'],
+                modalLearnings: 'Implemented game logic, including win condition checks and a basic AI opponent strategy using vanilla JavaScript.',
+                liveLink: 'https://hasanraiyan.github.io/projects/tik%20tak%20toe/index.html',
+                repoLink: null,
+                tags: ['JavaScript', 'Game', 'AI', 'Frontend'],
+                initiallyHidden: false,
+                animationDelay: 100
+            },
+            {
+                id: 'calculator',
+                title: 'Web Calculator',
+                imageSrc: './images/work-2.png',
+                imageAlt: 'Web Calculator',
+                shortDesc: 'Functional calculator for quick math.',
+                modalTitle: 'Web Calculator',
+                modalDesc: 'A functional web-based calculator built with HTML, CSS, and JavaScript. It handles basic arithmetic operations (+, -, *, /) and includes display updates and clear functionality.',
+                modalTech: ['HTML', 'CSS', 'JavaScript'],
+                modalLearnings: 'Focused on DOM manipulation with JavaScript to handle user input, update the display, and perform calculations.',
+                liveLink: 'https://hasanraiyan.github.io/projects/calculator/index.html',
+                repoLink: null,
+                tags: ['JavaScript', 'Utility', 'Frontend'],
+                initiallyHidden: false,
+                animationDelay: 200
+            },
+            {
+                id: 'ttt-pvp',
+                title: 'Tic Tac Toe (PvP)',
+                imageSrc: './images/work-3.png',
+                imageAlt: 'Tic Tac Toe PvP',
+                shortDesc: 'Play head-to-head with a friend.',
+                modalTitle: 'Tic Tac Toe (Player vs Player)',
+                modalDesc: 'Play the classic Tic Tac Toe game head-to-head against another player on the same device. Simple, fun, and includes turn indicators and win detection.',
+                modalTech: ['HTML', 'CSS', 'JavaScript'],
+                modalLearnings: 'Refined basic game logic and state management for a two-player experience.',
+                liveLink: 'https://hasanraiyan.github.io/TikTakToe/',
+                repoLink: 'https://github.com/hasanraiyan/TikTakToe',
+                tags: ['JavaScript', 'Game', 'Frontend'],
+                initiallyHidden: true, // Start hidden for "Show More"
+                animationDelay: 0 // Delay handled by show more logic
+            },
+            {
+                id: 'pm-ui',
+                title: 'Project Management UI',
+                imageSrc: './images/work-4.png',
+                imageAlt: 'Project Management UI',
+                shortDesc: 'Conceptual UI for project tracking.',
+                modalTitle: 'Project Management UI (Concept)',
+                modalDesc: 'A conceptual user interface design for a project management dashboard. Focuses on clean layout, component structure (cards, sidebars), and visual hierarchy using Tailwind CSS. This is primarily a design showcase.',
+                modalTech: ['HTML', 'Tailwind CSS'],
+                modalLearnings: 'Practiced translating UI concepts into functional HTML/CSS using Tailwind utilities for layout and styling. Focused on component-based structure.',
+                liveLink: 'https://hasanraiyan.github.io/projects/',
+                repoLink: null,
+                tags: ['Tailwind', 'UI/UX', 'Design', 'Frontend'],
+                initiallyHidden: true,
+                animationDelay: 0
+            },
+            {
+                id: 'notejs',
+                title: 'NoteJS App',
+                imageSrc: 'https://github.com/hasanraiyan/NoteJS/raw/main/assets/images/apps/HomeScreen.png',
+                imageAlt: 'NoteJS App Home Screen',
+                shortDesc: 'Simple notes app built with React Native.',
+                modalTitle: 'NoteJS - Simple Notes App',
+                modalDesc: 'NoteJS is a basic notes application built with React Native and Expo. It allows users to create, edit, delete, and save notes locally on their device.',
+                modalTech: ['React Native', 'Expo', 'JavaScript'],
+                modalLearnings: 'Developed a cross-platform mobile app, implemented local data storage using AsyncStorage, managed component state for CRUD operations (Create, Read, Update, Delete).',
+                liveLink: null,
+                repoLink: 'https://github.com/hasanraiyan/NoteJS',
+                tags: ['React Native', 'Mobile', 'JavaScript'],
+                initiallyHidden: true,
+                animationDelay: 0
+            },
+            {
+                id: 'dostify',
+                title: 'Dostify AI Companion',
+                imageSrc: 'https://dostify-climb.vercel.app/images/app-icon.png',
+                imageAlt: 'Dostify AI Companion Landing Page',
+                shortDesc: 'AI chatbot providing support for students.',
+                modalTitle: 'Dostify - AI Student Companion',
+                modalDesc: 'An AI-powered chatbot designed as a friendly companion for students, helping them navigate academic pressure, mental health challenges, and career uncertainty with personalized support, resources, and conversation starters.',
+                modalTech: ['React', 'Next.js', 'Tailwind CSS', 'AI Integration', 'Chatbot'],
+                modalLearnings: 'Developed an interactive chatbot interface, integrated with an AI backend (presumed), designed user journeys for various student needs (academic, mental health, career), built a responsive landing page showcasing features and benefits.',
+                liveLink: 'https://dostify-climb.vercel.app/',
+                repoLink: null,
+                tags: ['React', 'Next.js', 'Tailwind', 'AI', 'Chatbot', 'Frontend'],
+                initiallyHidden: true,
+                animationDelay: 0
+            },
+            // Add more projects here in the same format
+        ];
+
+        // --- Function to Create Project HTML Element ---
+        function createProjectElement(project) {
+            const workItem = document.createElement('div');
+            // Base classes + hidden/show-more based on data
+            workItem.className = `work-item group relative rounded-xl overflow-hidden shadow-lg bg-bg-surface dark:bg-dark-bg-surface transform transition duration-300 hover:shadow-2xl dark:hover:shadow-dark-bg-dark/50 hover:-translate-y-2 ${project.initiallyHidden ? 'hidden show-more-item' : 'animate-on-scroll animate-fade-up'}`; // Add hidden/show-more classes or animation classes
+
+            // Add data attributes for modal and filtering
+            workItem.dataset.modalTitle = project.modalTitle;
+            workItem.dataset.modalDesc = project.modalDesc;
+            workItem.dataset.modalTech = project.modalTech.join(', '); // Join array for display
+            workItem.dataset.modalLearnings = project.modalLearnings || '';
+            workItem.dataset.modalLive = project.liveLink || '';
+            workItem.dataset.modalRepo = project.repoLink || '';
+            workItem.dataset.tags = project.tags.join(',').toLowerCase(); // Store tags for filtering
+            workItem.dataset.id = project.id; // Store ID if needed later
+
+            // Add animation attributes only if not initially hidden
+             if (!project.initiallyHidden) {
+                 workItem.setAttribute('data-animate', ''); // Mark for scroll animation observer
+                 workItem.dataset.delay = project.animationDelay; // Apply initial animation delay
+             }
+
+
+            // Add Tilt attribute
+            workItem.setAttribute('data-tilt', '');
+
+            // Image
+            const img = document.createElement('img');
+            img.src = project.imageSrc;
+            img.alt = project.imageAlt;
+            img.className = 'w-full h-72 sm:h-80 md:h-96 object-cover object-top transition-transform duration-500 group-hover:scale-110';
+            img.loading = 'lazy';
+            workItem.appendChild(img);
+
+            // Layer (Hover Effect)
+            const layer = document.createElement('div');
+            layer.className = 'layer'; // Layer styles are defined in CSS
+
+            const glassEffect = document.createElement('div');
+            glassEffect.className = 'glass-effect rounded-lg p-4 w-full transform transition-transform duration-500 delay-100 group-hover:scale-100 scale-95';
+
+            const title = document.createElement('h3');
+            title.className = 'text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2';
+            title.textContent = project.title;
+            glassEffect.appendChild(title);
+
+            const shortDesc = document.createElement('p');
+            shortDesc.className = 'text-xs sm:text-sm text-gray-100 mb-3';
+            shortDesc.textContent = project.shortDesc;
+            glassEffect.appendChild(shortDesc);
+
+            const linksDiv = document.createElement('div');
+            linksDiv.className = 'flex justify-center space-x-3';
+
+            // Modal Button
+            const modalButton = document.createElement('button');
+            modalButton.onclick = () => openProjectModal(workItem); // Pass the element itself
+            modalButton.setAttribute('aria-label', `View details for ${project.title} project`);
+            modalButton.className = 'bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg icon-interact'; // Added icon-interact
+            modalButton.innerHTML = '<i class="fas fa-info"></i>';
+            linksDiv.appendChild(modalButton);
+
+            // Live Link Button (if exists)
+            if (project.liveLink) {
+                const liveLink = document.createElement('a');
+                liveLink.href = project.liveLink;
+                liveLink.target = '_blank';
+                liveLink.rel = 'noopener noreferrer';
+                liveLink.setAttribute('aria-label', `View live ${project.title} project`);
+                liveLink.className = 'bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg icon-interact'; // Added icon-interact
+                liveLink.innerHTML = '<i class="fas fa-external-link-alt"></i>';
+                linksDiv.appendChild(liveLink);
+            }
+
+            // Repo Link Button (if exists)
+            if (project.repoLink) {
+                const repoLink = document.createElement('a');
+                repoLink.href = project.repoLink;
+                repoLink.target = '_blank';
+                repoLink.rel = 'noopener noreferrer';
+                repoLink.setAttribute('aria-label', `View ${project.title} source code on Github`);
+                repoLink.className = 'bg-white text-primary dark:text-dark-primary rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl hover:bg-accent hover:text-white dark:hover:bg-dark-accent transition-all duration-300 transform hover:scale-110 shadow-md focus-visible:ring-offset-glass-bg dark:focus-visible:ring-offset-dark-glass-bg icon-interact'; // Added icon-interact
+                repoLink.innerHTML = '<i class="fab fa-github"></i>';
+                linksDiv.appendChild(repoLink);
+            }
+
+            glassEffect.appendChild(linksDiv);
+            layer.appendChild(glassEffect);
+            workItem.appendChild(layer);
+
+            return workItem;
+        }
+
+        // --- Function to Render Portfolio ---
+        function renderPortfolio(projects, containerElement) {
+            if (!containerElement) {
+                console.error("Portfolio container not found!");
+                return;
+            }
+            containerElement.innerHTML = ''; // Clear existing content
+            projects.forEach(project => {
+                const projectElement = createProjectElement(project);
+                containerElement.appendChild(projectElement);
+            });
+        }
+
+        // --- Function to Generate Filter Buttons ---
+        function generateFilterButtons(projects, containerElement) {
+            if (!containerElement) return;
+
+            const allTags = new Set(['All']); // Start with 'All'
+            // Extract unique tags, converting to title case for display
+            projects.forEach(p => p.tags.forEach(tag => {
+                const titleCaseTag = tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase(); // Basic title case
+                 allTags.add(titleCaseTag)
+             }));
+
+            containerElement.innerHTML = ''; // Clear existing buttons
+
+            allTags.forEach(tag => {
+                const button = document.createElement('button');
+                const filterValue = tag.toLowerCase(); // Use lowercase for filter value
+                button.className = 'filter-btn px-4 py-1.5 rounded-full text-sm font-medium text-text-light dark:text-dark-text-light hover:bg-gray-100 dark:hover:bg-dark-bg-surface transition';
+                button.dataset.filter = filterValue;
+                button.textContent = tag; // Display title-cased tag
+
+                if (tag === 'All') {
+                    // Make 'All' active by default
+                    button.classList.add('active', 'bg-primary/10', 'dark:bg-dark-primary/10', 'text-primary', 'dark:text-dark-primary', 'font-semibold');
+                    button.classList.remove('text-text-light', 'dark:text-dark-text-light', 'hover:bg-gray-100', 'dark:hover:bg-dark-bg-surface');
+                }
+
+                button.addEventListener('click', () => {
+                    filterPortfolio(filterValue); // Call filter function on click
+                });
+                containerElement.appendChild(button);
+            });
+        }
+
 
         // --- DOM Element Cache ---
         const Cache = {
@@ -1205,11 +1274,10 @@
             themeToggleButtons: document.querySelectorAll('#theme-toggle, #theme-toggle-mobile'),
             themeToggleDarkIcons: document.querySelectorAll('#theme-toggle-dark-icon, #theme-toggle-dark-icon-mobile'),
             themeToggleLightIcons: document.querySelectorAll('#theme-toggle-light-icon, #theme-toggle-light-icon-mobile'),
-            portfolioList: document.querySelector('#portfolio .work-list'),
-            portfolioFilters: document.getElementById('portfolio-filters'), // Added
+            portfolioList: document.getElementById('portfolio-work-list'), // Updated ID
+            portfolioFilters: document.getElementById('portfolio-filters'),
             portfolioMoreBtn: document.getElementById('more-btn'),
             portfolioLessBtn: document.getElementById('less-btn'),
-            portfolioHiddenWrapper: document.getElementById('portfolio-list-hidden'),
             projectModal: document.getElementById('project-modal'),
             modalOverlay: document.getElementById('project-modal'),
             modalContent: document.querySelector('#project-modal .modal-content'),
@@ -1233,6 +1301,8 @@
         // --- State Variables ---
         let isModalOpen = false;
         let focusedElementBeforeModal = null;
+        let currentPortfolioFilter = 'all'; // Keep track of the current filter
+        let portfolioShowAll = false; // Keep track if all items (matching filter) are shown
 
         // --- Utility Functions ---
         function debounce(func, wait) {
@@ -1285,7 +1355,7 @@
                  tabcontent.classList.toggle("active-tab", isTargetPanel); // Add active class for reference
                  tabcontent.classList.toggle("hidden", !isTargetPanel); // Use hidden for control
                  tabcontent.setAttribute('aria-hidden', (!isTargetPanel).toString());
-                 // Opacity transition is handled by CSS (.hidden !opacity-0, .active-tab opacity-100)
+                 // Opacity transition is handled by CSS
             });
 
             // Focus management for keyboard users
@@ -1355,12 +1425,12 @@
             }
         }
 
-        // IMPORTANT: If using Netlify Forms, Netlify handles the submission.
-        // You might only need JS for the loading state and success/error feedback based on Netlify's AJAX submission hooks if you want a smoother UX without a full page reload.
-        // This function remains as a SIMULATION unless you implement AJAX submission (e.g., using fetch).
         async function handleFormSubmit(e) {
-            e.preventDefault(); // Prevent default only if handling via JS AJAX
-            if (!Cache.contactForm) return;
+             // Handle Netlify submission directly via HTML attributes
+             // JS only handles validation, loading state, and feedback simulation
+             e.preventDefault(); // Prevent default submission initially
+
+             if (!Cache.contactForm) return;
 
              // Basic client-side validation check
             if (!Cache.contactForm.checkValidity()) {
@@ -1372,63 +1442,42 @@
 
             setLoading(true);
 
-            // --- AJAX Submission Example (replace simulation) ---
-            /*
+            // Prepare data for Netlify AJAX submission
             const formData = new FormData(Cache.contactForm);
-            try {
-                const response = await fetch(Cache.contactForm.action, { // Assumes action is set correctly
-                    method: 'POST',
-                    headers: { "Accept": "application/json" }, // Or whatever your endpoint expects
-                    body: formData
-                });
+            const formAction = Cache.contactForm.getAttribute('action') || '/'; // Default or specific action
 
-                if (response.ok) {
-                    showFeedback('Thank you for your message! I will get back to you soon.');
-                    Cache.contactForm.reset();
-                    setTimeout(hideFeedback, 6000);
-                } else {
-                    // Handle server-side errors (e.g., response.status)
-                    showFeedback('There was a problem sending your message. Please try again.', true);
-                }
-            } catch (error) {
+            fetch(formAction, {
+              method: "POST",
+              headers: { "Accept": "application/x-www-form-urlencoded" },
+              body: new URLSearchParams(formData).toString(),
+            })
+            .then(() => {
+                // Success
+                showFeedback('Thank you for your message! I will get back to you soon.');
+                Cache.contactForm.reset();
+                setTimeout(hideFeedback, 6000);
+            })
+            .catch((error) => {
+                // Error
                 console.error('Form submission error:', error);
-                showFeedback('An network error occurred. Please check your connection and try again.', true);
-            } finally {
+                showFeedback('There was a problem sending your message. Please try again.', true);
+             })
+            .finally(() => {
                 setLoading(false);
-            }
-            */
-
-            // --- Simulation (keep this if NOT using AJAX/Fetch) ---
-             await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
-             try {
-                 // Simulate success
-                 showFeedback('Thank you for your message! (Simulation)');
-                 Cache.contactForm.reset();
-                 setTimeout(hideFeedback, 6000);
-             } catch (error) {
-                 console.error('Form handling error (simulated):', error);
-                 showFeedback('An unexpected error occurred. Please try again later.', true);
-             } finally {
-                 setLoading(false);
-             }
+            });
         }
 
-        // --- Show More/Less Functionality (Enhanced with Animation) ---
-        function setupToggle(wrapper, itemSelector, moreBtn, lessBtn, initialVisibleCount, updateFnNameBase) {
+        // --- Show More/Less Functionality (Generic + Portfolio Specific) ---
+         function setupToggle(wrapper, itemSelector, moreBtn, lessBtn, initialVisibleCount) {
             if (!wrapper || !moreBtn || !lessBtn) {
-                console.warn(`Toggle setup failed for ${updateFnNameBase || 'unknown section'}: Elements missing.`);
+                console.warn(`Toggle setup failed: Elements missing for wrapper ${wrapper?.id}.`);
                 return;
             }
-            // Select direct children matching the selector within the wrapper
-             const items = (wrapper.id === 'portfolio-list-hidden')
-                 ? Array.from(wrapper.querySelectorAll(':scope > .work-item')) // Direct children for portfolio
-                 : Array.from(wrapper.querySelectorAll(`:scope > ${itemSelector}`)); // Direct children for others
 
-
+            const items = Array.from(wrapper.querySelectorAll(`:scope > ${itemSelector}`));
             const totalItems = items.length;
 
             if (totalItems <= initialVisibleCount) {
-                // If not enough items to hide, show all and hide controls
                 items.forEach(item => item.classList.remove('hidden'));
                 moreBtn.classList.add('hidden');
                 lessBtn.classList.add('hidden');
@@ -1445,74 +1494,118 @@
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
                 items.forEach((item, index) => {
-                    const isInitiallyHidden = index >= initialVisibleCount;
-                    const shouldBeHidden = isInitiallyHidden && !showAll;
+                    const shouldBeHidden = index >= initialVisibleCount && !showAll;
 
-                    if (!shouldBeHidden && item.classList.contains('hidden')) { // Item should be visible but is currently hidden
+                    if (!shouldBeHidden && item.classList.contains('hidden')) {
                         item.classList.remove('hidden');
-                        if (isInitiallyHidden && !prefersReducedMotion && item.classList.contains('show-more-item')) {
-                             // Apply animation only to items that were initially hidden and have the marker class
-                            item.classList.add('show-more-item'); // Ensure class is present
-                            item.style.animationDelay = `${(index - initialVisibleCount) * SHOW_MORE_STAGGER}ms`;
+                        if (!prefersReducedMotion && item.classList.contains('show-more-item')) {
                             item.classList.add('animate-in');
+                             item.style.animationDelay = `${(index - initialVisibleCount) * SHOW_MORE_STAGGER}ms`;
                             item.addEventListener('animationend', () => {
-                                item.classList.remove('animate-in', 'show-more-item'); // Clean up animation classes
-                                item.style.animationDelay = ''; // Reset delay
+                                item.classList.remove('animate-in');
+                                item.style.animationDelay = '';
                             }, { once: true });
                         } else {
-                             // Instantly show or if reduced motion is on
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateY(0)';
+                            item.style.opacity = '1'; item.style.transform = 'translateY(0)';
                         }
-                    } else if (shouldBeHidden && !item.classList.contains('hidden')) { // Item should be hidden but is currently visible
+                    } else if (shouldBeHidden && !item.classList.contains('hidden')) {
                         item.classList.add('hidden');
-                        // Reset any animation styles if they were applied
-                        item.classList.remove('animate-in', 'show-more-item');
-                        item.style.animationDelay = '';
-                        item.style.opacity = ''; // Reset opacity/transform if needed
-                        item.style.transform = '';
+                        item.classList.remove('animate-in'); item.style.animationDelay = '';
+                        item.style.opacity = ''; item.style.transform = '';
                     }
                 });
 
-                // Update button visibility and ARIA states
                 moreBtn.classList.toggle('hidden', showAll);
                 lessBtn.classList.toggle('hidden', !showAll);
                 moreBtn.setAttribute('aria-expanded', showAll.toString());
                 lessBtn.setAttribute('aria-expanded', showAll.toString());
 
-                // Focus management: move focus from Less to More button when collapsing
                 if (!showAll && document.activeElement === lessBtn) {
                     setTimeout(() => moreBtn.focus({ preventScroll: true }), 50);
                 }
             };
 
-            // Initial setup: hide items beyond the initial count
             items.forEach((item, index) => item.classList.toggle('hidden', index >= initialVisibleCount));
-
-            // Make sure controls are correctly visible/hidden initially
             moreBtn.classList.remove('hidden');
             lessBtn.classList.add('hidden');
             moreBtn.setAttribute('aria-expanded', 'false');
-            lessBtn.setAttribute('aria-expanded', 'false'); // Correct initial state for lessBtn
+            lessBtn.setAttribute('aria-expanded', 'false');
 
-            // Assign click handlers
             moreBtn.onclick = () => updateVisibility(true);
             lessBtn.onclick = () => updateVisibility(false);
         }
 
 
-        // --- Portfolio Filtering (NEW) ---
+        // This function now just applies visibility based on count to *already visible* items
+        function applyPortfolioShowMoreVisibility() {
+            if (!Cache.portfolioList || !Cache.portfolioMoreBtn || !Cache.portfolioLessBtn) return;
+
+            const visibleItems = Array.from(Cache.portfolioList.querySelectorAll('.work-item:not(.hidden)')); // Select only items currently visible (matching filter)
+            const totalVisibleItems = visibleItems.length;
+            const numberToShow = portfolioShowAll ? Infinity : PORTFOLIO_INITIAL_VISIBLE_COUNT;
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            visibleItems.forEach((item, index) => {
+                const shouldBeHiddenByShowLess = index >= numberToShow;
+
+                if (shouldBeHiddenByShowLess) {
+                    // Hide item due to show/less limit
+                     item.classList.add('show-more-item-hidden'); // Apply hiding class
+                     item.style.opacity = '0';
+                     item.style.transform = 'translateY(10px)'; // Consistent hidden style
+                     item.classList.remove('animate-in');
+                     item.style.animationDelay = '';
+                     item.setAttribute('aria-hidden', 'true'); // Hide from screen readers
+                } else {
+                    // Show item (it passed filter and is within limit)
+                    const wasHiddenByShowLess = item.classList.contains('show-more-item-hidden');
+                    item.classList.remove('show-more-item-hidden'); // Ensure hiding class is removed
+                    item.removeAttribute('aria-hidden');
+
+                    // Only animate if it was *specifically* hidden by show/less before and now revealed
+                    if (wasHiddenByShowLess && item.classList.contains('show-more-item') && !prefersReducedMotion) {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(10px)';
+                        void item.offsetWidth; // Reflow
+                        item.classList.add('animate-in');
+                        item.style.animationDelay = `${(index - PORTFOLIO_INITIAL_VISIBLE_COUNT) * SHOW_MORE_STAGGER}ms`;
+                         item.addEventListener('animationend', () => {
+                            item.classList.remove('animate-in');
+                            item.style.opacity = ''; item.style.transform = ''; item.style.animationDelay = '';
+                        }, { once: true });
+                    } else {
+                         // Ensure visible style if not animating
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }
+                }
+            });
+
+            // Update button visibility and ARIA states
+            const canShowMore = totalVisibleItems > PORTFOLIO_INITIAL_VISIBLE_COUNT;
+            Cache.portfolioMoreBtn.classList.toggle('hidden', portfolioShowAll || !canShowMore);
+            Cache.portfolioLessBtn.classList.toggle('hidden', !portfolioShowAll || !canShowMore);
+             Cache.portfolioMoreBtn.setAttribute('aria-expanded', portfolioShowAll.toString());
+             Cache.portfolioLessBtn.setAttribute('aria-expanded', portfolioShowAll.toString());
+             // Make sure buttons are interactive only when visible
+             Cache.portfolioMoreBtn.style.pointerEvents = (portfolioShowAll || !canShowMore) ? 'none' : 'auto';
+             Cache.portfolioLessBtn.style.pointerEvents = (!portfolioShowAll || !canShowMore) ? 'none' : 'auto';
+        }
+
+
+        // --- Portfolio Filtering (Updated) ---
         function filterPortfolio(filter) {
             if (!Cache.portfolioList || !Cache.portfolioFilters) return;
+            currentPortfolioFilter = filter.toLowerCase(); // Store current filter
 
-            const workItems = Cache.portfolioList.querySelectorAll('.work-list > .work-item, #portfolio-list-hidden > .work-item'); // Get all items
+            const workItems = Cache.portfolioList.querySelectorAll('.work-item');
             const filterButtons = Cache.portfolioFilters.querySelectorAll('.filter-btn');
 
             // Update button active states
             filterButtons.forEach(btn => {
-                const isActive = btn.dataset.filter === filter;
-                btn.classList.toggle('active', isActive); // Uses .active styles defined in CSS
-                // Update Tailwind classes for active/inactive state
+                const isActive = btn.dataset.filter === currentPortfolioFilter;
+                btn.classList.toggle('active', isActive);
                 btn.classList.toggle('bg-primary/10', isActive);
                 btn.classList.toggle('dark:bg-dark-primary/10', isActive);
                 btn.classList.toggle('text-primary', isActive);
@@ -1524,86 +1617,37 @@
                 btn.classList.toggle('dark:hover:bg-dark-bg-surface', !isActive);
             });
 
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
             workItems.forEach(item => {
-                const tech = item.dataset.modalTech || '';
-                // Simple check if tech string includes the filter keyword (case-insensitive)
-                // More robust: split tech into array and check: tech.toLowerCase().split(',').map(t=>t.trim()).includes(filter.toLowerCase())
-                const match = filter === 'all' || tech.toLowerCase().includes(filter.toLowerCase());
+                const tags = item.dataset.tags?.split(',') || [];
+                const match = currentPortfolioFilter === 'all' || tags.includes(currentPortfolioFilter);
 
-                if (!prefersReducedMotion) {
-                    // Animation logic
-                    item.style.transition = 'opacity 0.3s ease, transform 0.3s ease'; // Ensure transition is set
-                    if (match) {
-                        item.classList.remove('hidden');
-                        // Force reflow before applying visible styles for transition
-                        void item.offsetWidth;
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                        item.style.pointerEvents = 'auto'; // Make visible items interactive
-                    } else {
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.95)';
-                        item.style.pointerEvents = 'none'; // Make hidden items non-interactive during transition
-                        // Add 'hidden' class after transition completes
-                        item.addEventListener('transitionend', () => {
-                            if (item.style.opacity === '0') { // Check if it's still meant to be hidden
-                                item.classList.add('hidden');
-                            }
-                        }, { once: true });
-                         // Fallback if transitionend doesn't fire (e.g., display: none interference)
-                        setTimeout(() => {
-                            if (item.style.opacity === '0') item.classList.add('hidden');
-                        }, 350);
-                    }
-                } else {
-                    // Simple hide/show for reduced motion
-                    item.classList.toggle('hidden', !match);
-                    item.style.opacity = match ? '1' : '0';
-                    item.style.transform = match ? 'scale(1)' : 'scale(0.95)';
-                    item.style.pointerEvents = match ? 'auto' : 'none';
-                }
+                // Reset show/less specific hiding first
+                item.classList.remove('show-more-item-hidden');
+                item.removeAttribute('aria-hidden'); // Ensure not hidden by show/less initially
+
+                // Apply filtering visibility (using 'hidden' utility class from Tailwind)
+                item.classList.toggle('hidden', !match);
+
+                 // Set initial styles for transition (will be overridden by applyPortfolioShowMoreVisibility if needed)
+                 if (match) {
+                     item.style.opacity = '1';
+                     item.style.transform = 'scale(1)'; // Use scale or translateY
+                     item.style.pointerEvents = 'auto';
+                 } else {
+                     item.style.opacity = '0';
+                     item.style.transform = 'scale(0.95)';
+                     item.style.pointerEvents = 'none';
+                 }
+                 item.classList.remove('animate-in'); // Stop any ongoing reveal animation
+                 item.style.animationDelay = ''; // Reset delay
             });
 
-            // After filtering, reset the show more/less state for portfolio
-            // Hide the "less" button, show the "more" button if applicable
-            if(Cache.portfolioLessBtn && Cache.portfolioMoreBtn && Cache.portfolioHiddenWrapper) {
-                const hiddenItemsInWrapper = Cache.portfolioHiddenWrapper.querySelectorAll('.work-item');
-                hiddenItemsInWrapper.forEach(item => {
-                    if(!item.classList.contains('hidden')) { // If filtering made it visible, ensure it's shown correctly
-                         item.style.opacity = '1';
-                         item.style.transform = 'scale(1)';
-                         item.style.pointerEvents = 'auto';
-                    } else { // Ensure items still meant to be hidden by filter are styled correctly
-                         item.style.opacity = '0';
-                         item.style.transform = 'scale(0.95)';
-                         item.style.pointerEvents = 'none';
-                    }
-                });
+            // Reset show/less state and apply visibility limits to the *filtered* items
+            portfolioShowAll = false; // Always reset to show initial amount after filtering
+            applyPortfolioShowMoreVisibility();
 
-                // Check if there *are* any hidden items (due to show/less, not filtering)
-                 const anyItemsHiddenByToggle = Array.from(hiddenItemsInWrapper).some(item =>
-                     item.classList.contains('show-more-item') && item.classList.contains('hidden')
-                 );
-
-                 // Simplification: Always reset to "Show More" state after filtering
-                 // You could add more complex logic to preserve the shown/hidden state across filters
-                 const allPortfolioItems = document.querySelectorAll('.work-list > .work-item, #portfolio-list-hidden > .work-item');
-                 const initiallyVisibleCountPortfolio = 3; // Or however many are visible before "Show More"
-                 let visibleCount = 0;
-                 allPortfolioItems.forEach(item => {
-                    if (!item.classList.contains('hidden')) visibleCount++;
-                 });
-
-                 const totalMatchingItems = visibleCount; // Items visible after filtering
-
-                 setupToggle(Cache.portfolioHiddenWrapper, ".work-item", Cache.portfolioMoreBtn, Cache.portfolioLessBtn, 0, 'Portfolio'); // Re-run setup to reset buttons
-
-                // Re-apply filter to ensure correct state AFTER setupToggle resets visibility
-                filterPortfolio(filter); // Call itself again - careful with recursion depth if complex. Better: refactor updateVisibility in setupToggle.
-
-            }
+            // Re-run scroll animations check for items that became visible due to filtering
+            // The observer should pick them up automatically if they are not already marked 'is-visible'
         }
 
         // --- Accessibility: Focus Trapping ---
@@ -1612,82 +1656,66 @@
             const focusableEls = Array.from(element.querySelectorAll(FOCUSABLE_MODAL_ELEMENTS)).filter(el => el.offsetParent !== null);
 
             if (focusableEls.length === 0) {
-                // Try to focus a close button or the element itself if no other focusable elements found
                 const closeButton = element.querySelector('.icon-close, #modal-close-button');
-                if (closeButton) { try { closeButton.focus(); } catch (e) { console.warn("Failed to focus close button", e)} }
-                else if (element.hasAttribute('tabindex')) { try { element.focus(); } catch (e) {console.warn("Failed to focus container", e)} }
+                if (closeButton) { try { closeButton.focus(); } catch (e) {} }
+                else if (element.hasAttribute('tabindex')) { try { element.focus(); } catch (e) {} }
                 return;
             }
 
             const firstFocusableEl = focusableEls[0];
             const lastFocusableEl = focusableEls[focusableEls.length - 1];
 
-            try { firstFocusableEl.focus({ preventScroll: true }); } catch (e) { console.warn("Failed to focus first element in trap", e); }
+            try { firstFocusableEl.focus({ preventScroll: true }); } catch (e) {}
 
             const handleKeyDown = (e) => {
                 if (e.key !== 'Tab') return;
-
-                // Re-query focusable elements in case content changed dynamically
                 const currentFocusableEls = Array.from(element.querySelectorAll(FOCUSABLE_MODAL_ELEMENTS)).filter(el => el.offsetParent !== null);
-                 if (currentFocusableEls.length === 0) { e.preventDefault(); return; } // Prevent tabbing out if nothing focusable
-
-
+                if (currentFocusableEls.length === 0) { e.preventDefault(); return; }
                 const currentFirst = currentFocusableEls[0];
                 const currentLast = currentFocusableEls[currentFocusableEls.length - 1];
                 const currentlyFocused = document.activeElement;
 
-                if (e.shiftKey) { // Shift + Tab
-                    // If focus is on the first element or outside the trap, wrap to the last
+                if (e.shiftKey) {
                     if (currentlyFocused === currentFirst || !element.contains(currentlyFocused)) {
-                        e.preventDefault();
-                        try { currentLast.focus({ preventScroll: true }); } catch (e) { console.warn("Failed to focus last element in trap", e); }
+                        e.preventDefault(); try { currentLast.focus({ preventScroll: true }); } catch (e) {}
                     }
-                } else { // Tab
-                    // If focus is on the last element or outside the trap, wrap to the first
+                } else {
                      if (currentlyFocused === currentLast || !element.contains(currentlyFocused)) {
-                        e.preventDefault();
-                        try { currentFirst.focus({ preventScroll: true }); } catch (e) { console.warn("Failed to focus first element in trap", e); }
+                        e.preventDefault(); try { currentFirst.focus({ preventScroll: true }); } catch (e) {}
                     }
                 }
             };
-
-            element.focusTrapHandler = handleKeyDown; // Store handler reference for removal
+            element.focusTrapHandler = handleKeyDown;
             element.addEventListener('keydown', element.focusTrapHandler);
         }
         function releaseFocus(element = Cache.projectModal) {
-            if (!element) return;
-            // Remove the keydown listener using the stored reference
-            if (typeof element.focusTrapHandler === 'function') {
-                element.removeEventListener('keydown', element.focusTrapHandler);
-                delete element.focusTrapHandler; // Clean up reference
-            }
-             // Restore focus to the element that had focus before the modal/menu opened
+            if (!element || typeof element.focusTrapHandler !== 'function') return;
+            element.removeEventListener('keydown', element.focusTrapHandler);
+            delete element.focusTrapHandler;
             if (focusedElementBeforeModal) {
-                try { focusedElementBeforeModal.focus({ preventScroll: true }); } catch (e) { console.warn("Failed to restore focus", e); }
-                focusedElementBeforeModal = null; // Clear the stored element
+                try { focusedElementBeforeModal.focus({ preventScroll: true }); } catch (e) {}
+                focusedElementBeforeModal = null;
             }
         }
 
-        // --- Project Modal (Enhanced Transitions) ---
+        // --- Project Modal ---
         function openProjectModal(workItemElement) {
             if (!workItemElement || !Cache.modalOverlay || !Cache.modalContent || !Cache.modalTitle || !Cache.modalDesc || !Cache.modalTech || !Cache.modalLinks || !Cache.modalLearningsContainer || !Cache.modalCloseButton) {
                 console.error("Modal elements not found or work item invalid.");
                 return;
             }
 
-            // Populate Modal Content
+            // Populate Modal Content using dataset
             Cache.modalTitle.textContent = workItemElement.dataset.modalTitle || 'Project Details';
             Cache.modalDesc.textContent = workItemElement.dataset.modalDesc || 'No description available.';
             Cache.modalTech.textContent = workItemElement.dataset.modalTech || 'N/A';
 
-            // Populate Learnings (if available)
             Cache.modalLearningsContainer.innerHTML = ''; // Clear previous
             const learnings = workItemElement.dataset.modalLearnings;
             if (learnings) {
                 Cache.modalLearningsContainer.innerHTML = `<strong class="text-text-main dark:text-dark-text-main font-medium block mb-1">Key Learnings:</strong><p class="text-sm text-text-light dark:text-dark-text-light leading-relaxed">${learnings}</p>`;
             }
 
-            // Populate Links (if available)
             Cache.modalLinks.innerHTML = ''; // Clear previous
             const liveLink = workItemElement.dataset.modalLive;
             const repoLink = workItemElement.dataset.modalRepo;
@@ -1695,30 +1723,25 @@
             if (repoLink) Cache.modalLinks.innerHTML += `<a href="${repoLink}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary text-sm px-4 py-2"><i class="fab fa-github mr-2"></i> View Code</a>`;
             if (!liveLink && !repoLink) Cache.modalLinks.innerHTML = '<p class="text-sm text-text-light dark:text-dark-text-light italic">No external links available.</p>';
 
-            // Display Modal and Manage State/Focus
-            focusedElementBeforeModal = document.activeElement; // Store current focus
-            Cache.modalOverlay.classList.add('active'); // Trigger fade-in via CSS
+            focusedElementBeforeModal = document.activeElement;
+            Cache.modalOverlay.classList.add('active');
             Cache.modalOverlay.setAttribute('aria-hidden', 'false');
             isModalOpen = true;
-            document.body.style.overflow = 'hidden'; // Prevent background scroll
+            document.body.style.overflow = 'hidden';
 
-            // Delay focus trapping slightly to allow CSS transitions
             setTimeout(() => {
                 trapFocus(Cache.modalContent);
-                // Attempt to focus the first focusable element or the close button
                 const firstFocusable = Cache.modalContent.querySelector(FOCUSABLE_MODAL_ELEMENTS);
-                 try {
-                    (firstFocusable || Cache.modalCloseButton || Cache.modalContent).focus({ preventScroll: true });
-                 } catch (e) { console.warn("Failed to set initial focus in modal", e); }
-            }, 50); // Small delay
+                 try { (firstFocusable || Cache.modalCloseButton || Cache.modalContent).focus({ preventScroll: true }); } catch (e) {}
+            }, 50);
         }
         function closeProjectModal() {
             if (!Cache.modalOverlay || !isModalOpen) return;
-            Cache.modalOverlay.classList.remove('active'); // Trigger fade-out via CSS
+            Cache.modalOverlay.classList.remove('active');
             Cache.modalOverlay.setAttribute('aria-hidden', 'true');
             isModalOpen = false;
-            document.body.style.overflow = ''; // Restore background scroll
-            releaseFocus(Cache.modalContent); // Release focus trap and restore previous focus
+            document.body.style.overflow = '';
+            releaseFocus(Cache.modalContent);
         }
 
         // --- Footer & Scrolling ---
@@ -1735,59 +1758,46 @@
         function updateActiveNavLink() {
             let currentSectionId = '';
             const sections = document.querySelectorAll('main section[id]');
-            const scrollY = window.pageYOffset; // More compatible than scrollY
+            const scrollY = window.pageYOffset;
             const viewportHeight = window.innerHeight;
-            const docHeight = document.documentElement.scrollHeight; // Use scrollHeight for accurate doc height
+            const docHeight = document.documentElement.scrollHeight;
 
-            // Find current section based on scroll position
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - SCROLL_OFFSET - 50; // Adjust offset as needed
+                const sectionTop = section.offsetTop - SCROLL_OFFSET - 50;
                 const sectionHeight = section.offsetHeight;
                 if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                     currentSectionId = section.id;
                 }
             });
 
-            // Handle edge cases: near bottom or top
-            if (scrollY + viewportHeight >= docHeight - 100) { // Near bottom
+            if (scrollY + viewportHeight >= docHeight - 100) {
                 const lastSection = sections[sections.length - 1];
                 if (lastSection) currentSectionId = lastSection.id;
-            } else if (currentSectionId === '' && scrollY < (sections[0]?.offsetTop ?? 0)) { // Near top, before first section
-                 currentSectionId = 'hero'; // Default to hero if no other section matches
+            } else if (currentSectionId === '' && scrollY < (sections[0]?.offsetTop ?? 0)) {
+                 currentSectionId = 'hero';
             } else if (currentSectionId === '' && sections.length > 0) {
-                 currentSectionId = 'hero'; // Fallback to hero if still nothing matches
+                 currentSectionId = 'hero';
             }
 
-
-            // Update nav link styles and ARIA attributes
             Cache.navLinks.forEach(link => {
-                // Ensure we compare hashes correctly (e.g. link.hash is '#about', currentSectionId is 'about')
-                const linkHrefHash = link.getAttribute('href'); // Get the raw href like "#about"
+                const linkHrefHash = link.getAttribute('href');
                 const isActive = linkHrefHash === `#${currentSectionId}`;
-
-                link.classList.toggle('active-nav', isActive); // Controls the underline via CSS
+                link.classList.toggle('active-nav', isActive);
                 link.classList.toggle('text-primary', isActive);
                 link.classList.toggle('dark:text-dark-primary', isActive);
-                link.classList.toggle('font-semibold', isActive); // Make active link bold
-                // Ensure inactive links have base styles
+                link.classList.toggle('font-semibold', isActive);
                 link.classList.toggle('text-text-main', !isActive);
                 link.classList.toggle('dark:text-dark-text-light', !isActive);
-                link.classList.toggle('font-medium', !isActive); // Reset font weight if not active
-
+                link.classList.toggle('font-medium', !isActive);
                 link.setAttribute('aria-current', isActive ? 'page' : null);
             });
         }
-
-        const debouncedUpdateActiveNav = debounce(updateActiveNavLink, 100); // Debounce for performance
+        const debouncedUpdateActiveNav = debounce(updateActiveNavLink, 100);
 
         function handleScroll() {
             const scrollPosition = window.scrollY;
-
-            // Sticky header effect
             Cache.siteHeader?.classList.toggle('shadow-lg', scrollPosition > 50);
             Cache.siteHeader?.classList.toggle('glass-effect', scrollPosition > 50);
-
-            // Back-to-top button visibility
             if (Cache.backToTopButton) {
                 const isVisible = scrollPosition > 300;
                 Cache.backToTopButton.style.opacity = isVisible ? '1' : '0';
@@ -1795,51 +1805,61 @@
                 Cache.backToTopButton.style.pointerEvents = isVisible ? 'auto' : 'none';
                 Cache.backToTopButton.setAttribute('aria-hidden', (!isVisible).toString());
             }
-            // Update active nav link on scroll (debounced)
             debouncedUpdateActiveNav();
         }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         // --- Scroll Animations ---
-        function setupScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         let animationObserver; // Store observer globally
+         function setupScrollAnimations() {
+             const animatedElements = document.querySelectorAll('[data-animate]'); // Target elements marked for animation
+             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            if (!('IntersectionObserver' in window) || prefersReducedMotion) {
-                console.warn("IntersectionObserver not supported or reduced motion preferred, scroll animations disabled/simplified.");
-                animatedElements.forEach(el => {
-                    el.classList.add('is-visible', 'opacity-100');
-                    // Reset transforms if not reduced motion but observer failed
-                    if (!prefersReducedMotion) {
-                        el.classList.remove('animate-fade-up', 'animate-slide-left', 'animate-slide-right');
-                        el.style.transform = 'translate(0, 0)';
-                    }
-                     // Remove transitions entirely if reduced motion is preferred
-                    if (prefersReducedMotion) { el.style.transition = 'none'; }
-                });
-                return; // Exit if observer not supported or reduced motion
-            }
+             if (!('IntersectionObserver' in window)) {
+                 console.warn("IntersectionObserver not supported, scroll animations disabled.");
+                 animatedElements.forEach(el => el.classList.add('is-visible', 'opacity-100'));
+                 return;
+             }
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const delay = parseInt(entry.target.dataset.delay || '0', 10);
-                        entry.target.style.transitionDelay = `${delay}ms`;
-                        entry.target.classList.add('is-visible'); // Trigger animation by adding class
-                        observer.unobserve(entry.target); // Stop observing once animated
-                    }
-                });
-            }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 }); // Trigger slightly before element is fully visible
+             // Disconnect previous observer if exists to avoid observing removed elements
+             if (animationObserver) animationObserver.disconnect();
 
-            animatedElements.forEach(el => observer.observe(el));
-        }
+             if (prefersReducedMotion) {
+                  console.log("Reduced motion preferred, simplifying animations.");
+                  animatedElements.forEach(el => {
+                      el.classList.add('is-visible', 'opacity-100');
+                      el.style.transition = 'none';
+                      // Ensure transforms are reset if any were applied by classes
+                      el.style.transform = 'translate(0, 0)';
+                  });
+                  return; // Exit if reduced motion
+             }
+
+              animationObserver = new IntersectionObserver((entries) => {
+                 entries.forEach(entry => {
+                     if (entry.isIntersecting) {
+                         const delay = parseInt(entry.target.dataset.delay || '0', 10);
+                         entry.target.style.transitionDelay = `${delay}ms`;
+                         entry.target.classList.add('is-visible'); // Trigger animation
+                         animationObserver.unobserve(entry.target); // Observe only once
+                     }
+                 });
+             }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+
+             animatedElements.forEach(el => {
+                // Only observe if not already visible (prevents re-observing on filter changes)
+                if (!el.classList.contains('is-visible')) {
+                     animationObserver.observe(el);
+                }
+             });
+         }
+
 
         // --- Contact Info Helpers ---
         function copyEmailToClipboard() {
             const email = Cache.emailAddressSpan?.textContent;
             if (!email || !navigator.clipboard) {
-                alert('Failed to copy email. Clipboard API not available or permission denied.');
-                return;
+                alert('Failed to copy email.'); return;
             }
             navigator.clipboard.writeText(email).then(() => {
                 if (Cache.copyFeedbackSpan) {
@@ -1848,146 +1868,126 @@
                     setTimeout(() => {
                         Cache.copyFeedbackSpan.style.opacity = '0';
                         Cache.copyFeedbackSpan.setAttribute('aria-hidden', 'true');
-                    }, 2000); // Feedback disappears after 2 seconds
+                    }, 2000);
                 }
             }).catch(err => {
-                console.error('Could not copy text: ', err);
-                alert('Failed to copy email.');
+                console.error('Could not copy text: ', err); alert('Failed to copy email.');
             });
         }
 
         // --- Event Listener Setup ---
         function addEventListeners() {
-            // Mobile Menu
             Cache.mobileMenuButton?.addEventListener('click', openmenu);
             Cache.mobileMenuCloseButton?.addEventListener('click', closemenu);
-            Cache.sidemenu?.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', closemenu)); // Close menu on link click
+            Cache.sidemenu?.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener('click', closemenu));
 
-            // Tabs
             Cache.tabLinks.forEach(link => {
                 link.addEventListener('click', (e) => opentab(e, link.getAttribute('aria-controls')));
-                link.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opentab(e, link.getAttribute('aria-controls')); }
-                });
+                link.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opentab(e, link.getAttribute('aria-controls')); }});
             });
 
-            // Contact Form
             Cache.contactForm?.addEventListener('submit', handleFormSubmit);
 
-            // Smooth Scrolling for internal links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const targetId = this.hash;
-                    if (this.classList.contains('skip-link') || !targetId || targetId === '#') { return; } // Ignore skip link and empty hashes
+                    if (this.classList.contains('skip-link') || !targetId || targetId === '#') return;
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        e.preventDefault(); // Prevent default jump
+                        e.preventDefault();
                         smoothScrollTo(targetElement);
-                        // Improve accessibility: move focus to the section after scrolling
                         setTimeout(() => {
-                            targetElement.setAttribute('tabindex', '-1'); // Make non-interactive element focusable temporarily
-                             try { targetElement.focus({ preventScroll: true }); } catch (e) {console.warn("Failed to focus section", e) }
-                        }, 600); // Delay focus until scroll likely finished
+                            targetElement.setAttribute('tabindex', '-1');
+                            try { targetElement.focus({ preventScroll: true }); } catch (e) {}
+                        }, 600);
                     }
                 });
             });
 
-            // Back to Top Button
             Cache.backToTopButton?.addEventListener('click', scrollToTop);
 
-             // Project Modal Interactions
             Cache.modalCloseButton?.addEventListener('click', closeProjectModal);
-            Cache.modalOverlay?.addEventListener('click', (e) => { if (e.target === Cache.modalOverlay) closeProjectModal(); }); // Close on overlay click
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isModalOpen) closeProjectModal(); }); // Close on Escape key
+            Cache.modalOverlay?.addEventListener('click', (e) => { if (e.target === Cache.modalOverlay) closeProjectModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isModalOpen) closeProjectModal(); });
 
-            // Copy Email Button
             Cache.copyEmailBtn?.addEventListener('click', copyEmailToClipboard);
 
-            // Portfolio Filters (NEW)
-            Cache.portfolioFilters?.querySelectorAll('.filter-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    filterPortfolio(button.dataset.filter);
-                });
-            });
+             // Portfolio Show/Less Buttons Listeners
+             Cache.portfolioMoreBtn?.addEventListener('click', () => {
+                 portfolioShowAll = true;
+                 applyPortfolioShowMoreVisibility();
+                 // Focus management: Focus the first newly revealed item
+                 const firstNewItem = Cache.portfolioList.querySelector(`.work-item:not(.hidden):not(.show-more-item-hidden):nth-child(${PORTFOLIO_INITIAL_VISIBLE_COUNT + 1})`);
+                  try { firstNewItem?.focus({ preventScroll: true }); } catch(e) {}
+             });
+             Cache.portfolioLessBtn?.addEventListener('click', () => {
+                 portfolioShowAll = false;
+                 applyPortfolioShowMoreVisibility();
+                  // Focus management: Focus the "Show More" button
+                  try { Cache.portfolioMoreBtn?.focus({ preventScroll: true }); } catch(e) {}
+                 // Scroll slightly up to ensure buttons are visible if they were below fold
+                  const controlsTop = Cache.portfolioMoreBtn?.getBoundingClientRect().top + window.pageYOffset - (Cache.siteHeader?.offsetHeight || SCROLL_OFFSET) - 30;
+                  // Only scroll if the button is actually below the viewport top
+                  if (Cache.portfolioMoreBtn?.getBoundingClientRect().top > (Cache.siteHeader?.offsetHeight || SCROLL_OFFSET)) {
+                      window.scrollTo({ top: controlsTop, behavior: 'smooth' });
+                  }
+             });
 
-
-            // Global Scroll Listener
-            window.addEventListener('scroll', handleScroll, { passive: true }); // Use passive listener for scroll performance
+            window.addEventListener('scroll', handleScroll, { passive: true });
         }
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("DOM Loaded - Initializing Portfolio v3.5...");
+            console.log("DOM Loaded - Initializing Portfolio v3.6 (Dynamic)...");
             initializeTheme();
             setFooterYear();
 
-            // Setup Show More/Less for Skills and Education
-            setupToggle(Cache.skillsHiddenWrapper, "li", Cache.skillsMoreBtn, Cache.skillsLessBtn, 0, 'Skills');
-            setupToggle(Cache.educationHiddenWrapper, "li", Cache.educationMoreBtn, Cache.educationLessBtn, 0, 'Education');
-            // Setup Show More/Less for Portfolio (initializes hidden items)
-             // The `initialVisibleCount` here is 0 because the wrapper *only* contains initially hidden items.
-             // The main grid handles the first 3 visible items.
-            setupToggle(Cache.portfolioHiddenWrapper, ".work-item", Cache.portfolioMoreBtn, Cache.portfolioLessBtn, 0, 'Portfolio');
+            // Render Portfolio Items Dynamically
+            renderPortfolio(portfolioData, Cache.portfolioList);
 
+            // Generate Filter Buttons Dynamically
+            generateFilterButtons(portfolioData, Cache.portfolioFilters);
 
-            // Initialize Typed.js (NEW)
+            // Setup Show More/Less for About section tabs
+            setupToggle(Cache.skillsHiddenWrapper, "li", Cache.skillsMoreBtn, Cache.skillsLessBtn, 0);
+            setupToggle(Cache.educationHiddenWrapper, "li", Cache.educationMoreBtn, Cache.educationLessBtn, 0);
+
+            // Apply initial visibility limits for the portfolio
+            applyPortfolioShowMoreVisibility();
+
+            // Initialize Typed.js
             if (typeof Typed !== 'undefined' && document.getElementById('typed-output')) {
-                 const typed = new Typed('#typed-output', {
-                    strings: [
-                    'from MIT Muzaffarpur.',
-                    'a MERN Stack Developer.',
-                    'a Problem Solver.',
-                    'Passionate about Code.'
-                    ],
-                    typeSpeed: 50,
-                    backSpeed: 30,
-                    backDelay: 1500,
-                    loop: true,
-                    smartBackspace: true,
-                    cursorChar: '_', // Optional: Customize cursor
+                 new Typed('#typed-output', {
+                    strings: ['from MIT Muzaffarpur.', 'a MERN Stack Developer.', 'a Problem Solver.', 'Passionate about Code.'],
+                    typeSpeed: 50, backSpeed: 30, backDelay: 1500, loop: true, smartBackspace: true, cursorChar: '_',
                  });
             } else {
                 console.warn("Typed.js library not found or target element missing.");
-                // Provide fallback text if Typed.js fails
                 const typedOutput = document.getElementById('typed-output');
                 if (typedOutput) typedOutput.textContent = "from MIT Muzaffarpur.";
             }
 
-
-            // Initialize Vanilla-Tilt.js (NEW)
-             const workItemsForTilt = document.querySelectorAll('.work-item');
-             if (workItemsForTilt.length > 0 && typeof VanillaTilt !== 'undefined') {
+            // Initialize Vanilla-Tilt.js on the generated items
+             const workItemsForTilt = Cache.portfolioList?.querySelectorAll('.work-item');
+             if (workItemsForTilt && workItemsForTilt.length > 0 && typeof VanillaTilt !== 'undefined') {
                 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                if (!prefersReducedMotion) { // Only init tilt if motion is OK
-                    VanillaTilt.init(workItemsForTilt, {
-                        max: 8,
-                        speed: 400,
-                        glare: true,
-                        "max-glare": 0.2 // Subtle glare
-                    });
+                if (!prefersReducedMotion) {
+                    VanillaTilt.init(workItemsForTilt, { max: 8, speed: 400, glare: true, "max-glare": 0.2 });
                 }
              } else if (typeof VanillaTilt === 'undefined') {
                  console.warn("Vanilla-Tilt.js library not found.");
              }
 
-
-            // Stagger initial portfolio item animations
-            const initialPortfolioItems = Cache.portfolioList?.querySelectorAll('.work-list > .work-item:not(#portfolio-list-hidden .work-item)') || [];
-            initialPortfolioItems.forEach((item, index) => {
-                if (!item.dataset.delay) { // Apply delay if not already set
-                    item.dataset.delay = index * ANIMATION_DELAY_STEP;
-                }
-            });
-
-            // Setup scroll animations and event listeners
+            // Setup scroll animations (Must run AFTER elements are in the DOM)
             setupScrollAnimations();
+            // Add event listeners (Must run AFTER elements are in the DOM)
             addEventListeners();
 
             // Initial setup calls
-            handleScroll(); // Set initial header state etc.
-            updateActiveNavLink(); // Set initial active nav link
+            handleScroll();
+            updateActiveNavLink();
 
-             // Ensure initial tab content visibility is correct
+            // Ensure initial tab content visibility is correct
              const activeTabButton = document.querySelector('.tab-links.active-link');
              if (activeTabButton) {
                  const initialPanelId = activeTabButton.getAttribute('aria-controls');
@@ -2004,20 +2004,14 @@
         window.addEventListener('load', () => {
             console.log("Window Loaded - Hiding Preloader.");
             if (Cache.preloader) {
-                Cache.preloader.classList.add('loaded'); // Trigger fade out
-                // Remove preloader from DOM after transition
-                Cache.preloader.addEventListener('transitionend', () => {
-                     Cache.preloader.remove();
-                }, { once: true });
+                Cache.preloader.classList.add('loaded');
+                Cache.preloader.addEventListener('transitionend', () => Cache.preloader?.remove(), { once: true });
             }
         });
 
-        // --- Global Helper Functions (for inline onclick calls) ---
-        // It's generally better to attach listeners in JS (like done in addEventListeners),
-        // but these keep your existing onclick attributes functional.
-        function showMorePortfolio() { Cache.portfolioMoreBtn?.click(); }
-        function showLessPortfolio() { Cache.portfolioLessBtn?.click(); }
+        // --- Global Helper Functions (for inline onclick calls if kept, though listeners preferred) ---
         // Note: openProjectModal, closeProjectModal, openmenu, closemenu, scrollToTop are already defined above.
+        // showMorePortfolio/showLessPortfolio are removed as they are handled by listeners now.
 
     </script>
 
